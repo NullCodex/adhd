@@ -75,7 +75,10 @@ export default function AssessmentPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
-    console.log('Assessment answers:', answers);
+    // In production, send to analytics or backend instead of console.log
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Assessment answers:', answers);
+    }
   };
 
   const allQuestionsAnswered = questions.every((_, index) => answers[index] !== undefined);

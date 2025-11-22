@@ -1,59 +1,69 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { SECTIONS, SCROLL_CONFIG, NAV_CONFIG, EXTERNAL_LINK_ATTRS, type SectionId } from '@/lib/constants';
+import { throttle, isBrowser } from '@/lib/utils';
+import { SkipLink } from '@/components/SkipLink';
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState<SectionId | ''>('');
   const [isProgrammaticScroll, setIsProgrammaticScroll] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Don't update during programmatic scrolling
-      if (isProgrammaticScroll) {
-        return;
-      }
+  const handleScroll = useCallback(() => {
+    // Don't update during programmatic scrolling
+    if (isProgrammaticScroll || !isBrowser()) {
+      return;
+    }
 
-      const sections = ['what-is-adhd', 'statistics', 'assessments', 'about-assessments', 'other-assessments', 'understanding-adhd'];
-      const scrollPosition = window.scrollY + 150; // Offset for sticky nav
+    const scrollPosition = window.scrollY + SCROLL_CONFIG.SCROLL_DETECTION_OFFSET;
 
-      // Check sections from bottom to top to prioritize later sections when at boundaries
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          const elementTop = window.scrollY + rect.top;
-          const elementBottom = elementTop + rect.height;
-          
-          // Check if scroll position is within this section
-          // Be more strict - require scroll to be past the start of the section
-          if (scrollPosition >= elementTop && scrollPosition < elementBottom + 50) {
-            setActiveSection(section);
-            break;
-          }
+    // Check sections from bottom to top to prioritize later sections when at boundaries
+    for (let i = SECTIONS.length - 1; i >= 0; i--) {
+      const section = SECTIONS[i];
+      const element = document.getElementById(section);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        const elementTop = window.scrollY + rect.top;
+        const elementBottom = elementTop + rect.height;
+        
+        // Check if scroll position is within this section
+        if (scrollPosition >= elementTop && scrollPosition < elementBottom + SCROLL_CONFIG.BOUNDARY_TOLERANCE) {
+          setActiveSection(section);
+          break;
         }
       }
-    };
+    }
+  }, [isProgrammaticScroll]);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+  // Throttle scroll handler for better performance
+  const throttledHandleScroll = useMemo(
+    () => throttle(handleScroll, 16), // ~60fps
+    [handleScroll]
+  );
+
+  useEffect(() => {
+    if (!isBrowser()) return;
+
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
     handleScroll(); // Check on mount
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', throttledHandleScroll);
     };
-  }, [isProgrammaticScroll]);
+  }, [throttledHandleScroll, handleScroll]);
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = useCallback((id: SectionId) => {
+    if (!isBrowser()) return;
+
     // Immediately set the active section when clicking
     setActiveSection(id);
     setIsProgrammaticScroll(true);
     
     const element = document.getElementById(id);
     if (element) {
-      const offset = 100; // Account for sticky nav
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const offsetPosition = elementPosition + window.pageYOffset - SCROLL_CONFIG.OFFSET;
 
       window.scrollTo({
         top: offsetPosition,
@@ -63,7 +73,7 @@ export default function Home() {
       // Keep the target section active during scroll
       const checkInterval = setInterval(() => {
         setActiveSection(id);
-      }, 50);
+      }, SCROLL_CONFIG.ACTIVE_CHECK_INTERVAL);
 
       // After scroll completes, re-enable scroll detection and verify
       setTimeout(() => {
@@ -74,88 +84,60 @@ export default function Home() {
         
         // Verify after a short delay
         setTimeout(() => {
-          const scrollPosition = window.scrollY + 150;
+          if (!isBrowser()) return;
+          const scrollPosition = window.scrollY + SCROLL_CONFIG.SCROLL_DETECTION_OFFSET;
           const rect = element.getBoundingClientRect();
           const elementTop = window.scrollY + rect.top;
           const elementBottom = elementTop + rect.height;
           
-          if (scrollPosition >= elementTop && scrollPosition < elementBottom + 50) {
+          if (scrollPosition >= elementTop && scrollPosition < elementBottom + SCROLL_CONFIG.BOUNDARY_TOLERANCE) {
             setActiveSection(id);
           }
-        }, 100);
-      }, 800); // Wait for smooth scroll to complete
+        }, SCROLL_CONFIG.VERIFICATION_DELAY);
+      }, SCROLL_CONFIG.SCROLL_COMPLETE_DELAY);
     }
-  };
+  }, []);
+
+  const navigationItems = useMemo(() => [
+    { id: 'what-is-adhd' as SectionId, label: 'What is ADHD?' },
+    { id: 'statistics' as SectionId, label: 'Statistics' },
+    { id: 'assessments' as SectionId, label: 'Assessments' },
+    { id: 'about-assessments' as SectionId, label: 'About Tests' },
+    { id: 'other-assessments' as SectionId, label: 'Other Tools' },
+    { id: 'understanding-adhd' as SectionId, label: 'Understanding ADHD' },
+    { id: 'medications' as SectionId, label: 'Medications' },
+  ], []);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Sticky Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 py-3">
-          <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4">
-            <button
-              onClick={() => scrollToSection('what-is-adhd')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                activeSection === 'what-is-adhd'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              What is ADHD?
-            </button>
-            <button
-              onClick={() => scrollToSection('statistics')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                activeSection === 'statistics'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              Statistics
-            </button>
-            <button
-              onClick={() => scrollToSection('assessments')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                activeSection === 'assessments'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              Assessments
-            </button>
-            <button
-              onClick={() => scrollToSection('about-assessments')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                activeSection === 'about-assessments'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              About Tests
-            </button>
-            <button
-              onClick={() => scrollToSection('other-assessments')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                activeSection === 'other-assessments'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              Other Tools
-            </button>
-            <button
-              onClick={() => scrollToSection('understanding-adhd')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                activeSection === 'understanding-adhd'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              Understanding ADHD
-            </button>
+    <>
+      <SkipLink />
+      <main id="main-content" className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        {/* Sticky Navigation */}
+        <nav 
+          className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-gray-200"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          <div className="max-w-7xl mx-auto px-4 py-3">
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4">
+              {navigationItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  aria-label={`Navigate to ${item.label} section`}
+                  aria-current={activeSection === item.id ? 'page' : undefined}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                    activeSection === item.id
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Hero Section */}
@@ -203,6 +185,28 @@ export default function Home() {
               </div>
             </div>
           </div>
+          
+          {/* Learn More Links */}
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <h3 className="text-lg font-semibold mb-3 text-gray-800">Learn More</h3>
+            <div className="flex flex-wrap gap-3">
+              <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                NIMH - ADHD Information
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.cdc.gov/ncbddd/adhd/index.html" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                CDC - ADHD Resources
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://chadd.org/about-adhd/overview/" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                CHADD - About ADHD
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.mayoclinic.org/diseases-conditions/adhd/symptoms-causes/syc-20350889" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                Mayo Clinic - ADHD Overview
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Statistics Section */}
@@ -243,6 +247,28 @@ export default function Home() {
               </p>
             </div>
           </div>
+          
+          {/* Learn More Links */}
+          <div className="mt-6 pt-6 border-t border-white/20">
+            <h3 className="text-lg font-semibold mb-3 text-white">Learn More</h3>
+            <div className="flex flex-wrap gap-3 text-white/90">
+              <a href="https://www.cdc.gov/ncbddd/adhd/data.html" {...EXTERNAL_LINK_ATTRS} className="hover:text-white underline text-sm">
+                CDC - ADHD Data & Statistics
+              </a>
+              <span className="text-white/60">•</span>
+              <a href="https://www.nimh.nih.gov/health/statistics/attention-deficit-hyperactivity-disorder-adhd" {...EXTERNAL_LINK_ATTRS} className="hover:text-white underline text-sm">
+                NIMH - ADHD Statistics
+              </a>
+              <span className="text-white/60">•</span>
+              <a href="https://chadd.org/about-adhd/adhd-facts-and-statistics/" {...EXTERNAL_LINK_ATTRS} className="hover:text-white underline text-sm">
+                CHADD - ADHD Facts & Statistics
+              </a>
+              <span className="text-white/60">•</span>
+              <a href="https://www.who.int/news-room/fact-sheets/detail/attention-deficit-hyperactivity-disorder" {...EXTERNAL_LINK_ATTRS} className="hover:text-white underline text-sm">
+                WHO - ADHD Fact Sheet
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Assessment Cards */}
@@ -252,7 +278,7 @@ export default function Home() {
             <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col hover:shadow-xl transition-shadow">
               <div className="mb-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
@@ -279,7 +305,7 @@ export default function Home() {
             <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col hover:shadow-xl transition-shadow">
               <div className="mb-4">
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                   </svg>
                 </div>
@@ -306,7 +332,7 @@ export default function Home() {
             <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col hover:shadow-xl transition-shadow">
               <div className="mb-4">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
@@ -328,6 +354,24 @@ export default function Home() {
             >
               Start TOVA Test
             </Link>
+          </div>
+        </div>
+        
+        {/* Learn More Links for Assessments */}
+        <div className="mt-6 pt-6 border-t border-gray-200">
+          <h3 className="text-lg font-semibold mb-3 text-gray-800">Learn More About ADHD Assessments</h3>
+          <div className="flex flex-wrap gap-3">
+            <a href="https://chadd.org/about-adhd/diagnosis-of-adhd-in-adults/" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+              CHADD - ADHD Diagnosis in Adults
+            </a>
+            <span className="text-gray-400">•</span>
+            <a href="https://www.cdc.gov/ncbddd/adhd/diagnosis.html" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+              CDC - Diagnosing ADHD
+            </a>
+            <span className="text-gray-400">•</span>
+            <a href="https://www.additudemag.com/adhd-testing-diagnosis-guide/" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+              ADDitude - ADHD Testing Guide
+            </a>
           </div>
         </div>
         </div>
@@ -406,6 +450,24 @@ export default function Home() {
                 including medical history, physical examination, and consideration of multiple information sources. 
                 If you have concerns about ADHD, please consult with a healthcare provider.
               </p>
+            </div>
+          </div>
+          
+          {/* Learn More Links */}
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <h3 className="text-lg font-semibold mb-3 text-gray-800">Learn More</h3>
+            <div className="flex flex-wrap gap-3">
+              <a href="https://chadd.org/about-adhd/diagnosis-of-adhd-in-adults/" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                CHADD - ADHD Diagnosis
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.psychiatry.org/File%20Library/Psychiatrists/Practice/DSM/APA_DSM-5-ADHD.pdf" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                APA - DSM-5 ADHD Criteria
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.cdc.gov/ncbddd/adhd/diagnosis.html" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                CDC - ADHD Diagnosis Guidelines
+              </a>
             </div>
           </div>
         </div>
@@ -551,6 +613,24 @@ export default function Home() {
               depends on the individual's age, specific concerns, and the clinical context. Always consult with 
               qualified healthcare professionals for proper assessment and diagnosis.
             </p>
+          </div>
+          
+          {/* Learn More Links */}
+          <div className="mt-6 pt-6 border-t border-indigo-200">
+            <h3 className="text-lg font-semibold mb-3 text-gray-800">Learn More</h3>
+            <div className="flex flex-wrap gap-3">
+              <a href="https://chadd.org/about-adhd/diagnosis-of-adhd-in-adults/" {...EXTERNAL_LINK_ATTRS} className="text-indigo-600 hover:text-indigo-800 underline text-sm">
+                CHADD - Assessment Tools
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.additudemag.com/adhd-testing-diagnosis-guide/" {...EXTERNAL_LINK_ATTRS} className="text-indigo-600 hover:text-indigo-800 underline text-sm">
+                ADDitude - ADHD Testing Resources
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.apa.org/topics/adhd" {...EXTERNAL_LINK_ATTRS} className="text-indigo-600 hover:text-indigo-800 underline text-sm">
+                APA - ADHD Resources
+              </a>
+            </div>
           </div>
         </div>
 
@@ -899,9 +979,340 @@ export default function Home() {
               </p>
             </div>
           </div>
+          
+          {/* Learn More Links */}
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <h3 className="text-lg font-semibold mb-3 text-gray-800">Learn More</h3>
+            <div className="flex flex-wrap gap-3">
+              <a href="https://chadd.org/about-adhd/overview/" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                CHADD - Understanding ADHD
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                NIMH - ADHD Information
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.additudemag.com/" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                ADDitude Magazine
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.mayoclinic.org/diseases-conditions/adhd" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                Mayo Clinic - ADHD
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Medications Section */}
+        <div id="medications" className="mt-8 bg-white rounded-lg shadow-lg p-8 scroll-mt-24">
+          <h2 className="text-3xl font-bold mb-6 text-gray-900">
+            ADHD Medications
+          </h2>
+          <p className="text-gray-700 mb-6 text-lg">
+            Medication can be an effective component of ADHD treatment when prescribed and monitored by a qualified healthcare professional. 
+            This section provides information about common ADHD medications, their mechanisms, and important considerations.
+          </p>
+
+          {/* Important Disclaimer */}
+          <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg mb-8">
+            <p className="text-lg font-semibold text-red-800 mb-2">
+              ⚠️ Important Medical Disclaimer
+            </p>
+            <p className="text-red-700">
+              The information provided here is for educational purposes only and should not replace professional medical advice, diagnosis, or treatment. 
+              Always consult with a qualified healthcare provider before starting, stopping, or changing any medication. Only licensed healthcare professionals 
+              can prescribe ADHD medications after a proper evaluation.
+            </p>
+          </div>
+
+          {/* Stimulant Medications */}
+          <div className="mb-8">
+            <h3 className="text-2xl font-semibold mb-4 text-gray-800 border-b-2 border-blue-200 pb-2">
+              Stimulant Medications
+            </h3>
+            <p className="text-gray-700 mb-4">
+              Stimulants are the most commonly prescribed medications for ADHD and are considered first-line treatment. 
+              They work by increasing the levels of certain neurotransmitters (dopamine and norepinephrine) in the brain, 
+              which helps improve attention, focus, and impulse control.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Methylphenidate-based */}
+              <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                <h4 className="text-lg font-semibold mb-3 text-blue-900">Methylphenidate-Based Medications</h4>
+                <p className="text-gray-700 mb-3 text-sm">
+                  These medications are available in various formulations with different durations of action.
+                </p>
+                <ul className="text-sm text-gray-700 space-y-2">
+                  <li>
+                    <strong>Ritalin (immediate-release):</strong> Short-acting, typically lasts 3-4 hours
+                  </li>
+                  <li>
+                    <strong>Ritalin LA (long-acting):</strong> Extended-release, lasts 8-12 hours
+                  </li>
+                  <li>
+                    <strong>Concerta (extended-release):</strong> Once-daily dosing, lasts 10-12 hours
+                  </li>
+                  <li>
+                    <strong>Daytrana (patch):</strong> Transdermal patch, provides consistent delivery
+                  </li>
+                  <li>
+                    <strong>Focalin / Focalin XR:</strong> Dexmethylphenidate, similar to methylphenidate
+                  </li>
+                  <li>
+                    <strong>Quillivant XR / Quillichew ER:</strong> Liquid and chewable formulations
+                  </li>
+                </ul>
+              </div>
+
+              {/* Amphetamine-based */}
+              <div className="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500">
+                <h4 className="text-lg font-semibold mb-3 text-purple-900">Amphetamine-Based Medications</h4>
+                <p className="text-gray-700 mb-3 text-sm">
+                  These medications also increase dopamine and norepinephrine, with slightly different mechanisms.
+                </p>
+                <ul className="text-sm text-gray-700 space-y-2">
+                  <li>
+                    <strong>Adderall / Adderall XR:</strong> Mixed amphetamine salts, immediate and extended-release
+                  </li>
+                  <li>
+                    <strong>Vyvanse (lisdexamfetamine):</strong> Prodrug that converts to dextroamphetamine, long-acting
+                  </li>
+                  <li>
+                    <strong>Dexedrine / Dexedrine Spansule:</strong> Dextroamphetamine, immediate and extended-release
+                  </li>
+                  <li>
+                    <strong>Evekeo:</strong> Racemic amphetamine sulfate
+                  </li>
+                  <li>
+                    <strong>Mydayis:</strong> Triple-bead delivery system, lasts up to 16 hours
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-4 bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-lg">
+              <p className="text-sm text-yellow-800">
+                <strong>Note:</strong> Stimulant medications are controlled substances and require careful monitoring. 
+                Common side effects may include decreased appetite, sleep difficulties, headaches, and increased heart rate or blood pressure. 
+                These medications should not be used by individuals with certain heart conditions, glaucoma, or a history of substance abuse.
+              </p>
+            </div>
+          </div>
+
+          {/* Non-Stimulant Medications */}
+          <div className="mb-8">
+            <h3 className="text-2xl font-semibold mb-4 text-gray-800 border-b-2 border-green-200 pb-2">
+              Non-Stimulant Medications
+            </h3>
+            <p className="text-gray-700 mb-4">
+              Non-stimulant medications may be preferred when stimulants are not suitable, cause intolerable side effects, 
+              or when there are concerns about abuse potential. They work through different mechanisms than stimulants.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                <h4 className="text-lg font-semibold mb-3 text-green-900">Atomoxetine (Strattera)</h4>
+                <p className="text-gray-700 mb-3 text-sm">
+                  A selective norepinephrine reuptake inhibitor (SNRI) that is not a controlled substance.
+                </p>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  <li>• Takes 2-4 weeks to see full effects</li>
+                  <li>• Once-daily dosing</li>
+                  <li>• May help with anxiety symptoms</li>
+                  <li>• Common side effects: nausea, fatigue, decreased appetite</li>
+                  <li>• May cause liver problems in rare cases</li>
+                </ul>
+              </div>
+
+              <div className="bg-teal-50 p-6 rounded-lg border-l-4 border-teal-500">
+                <h4 className="text-lg font-semibold mb-3 text-teal-900">Alpha-2 Agonists</h4>
+                <p className="text-gray-700 mb-3 text-sm">
+                  These medications work by affecting norepinephrine receptors in the prefrontal cortex.
+                </p>
+                <ul className="text-sm text-gray-700 space-y-2">
+                  <li>
+                    <strong>Guanfacine (Intuniv, Tenex):</strong> Extended-release formulation, may help with hyperactivity and impulsivity
+                  </li>
+                  <li>
+                    <strong>Clonidine (Kapvay, Catapres):</strong> Can help with hyperactivity, impulsivity, and sleep issues
+                  </li>
+                </ul>
+                <p className="text-sm text-gray-700 mt-3">
+                  Common side effects: drowsiness, fatigue, low blood pressure, dizziness. These medications should not be stopped abruptly.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Medication Considerations */}
+          <div className="mb-8">
+            <h3 className="text-2xl font-semibold mb-4 text-gray-800 border-b-2 border-indigo-200 pb-2">
+              Important Considerations
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-indigo-50 p-6 rounded-lg">
+                <h4 className="text-lg font-semibold mb-3 text-indigo-900">Finding the Right Medication</h4>
+                <ul className="text-sm text-gray-700 space-y-2">
+                  <li>• Medication effectiveness varies significantly between individuals</li>
+                  <li>• Finding the right medication and dosage often requires trial and adjustment</li>
+                  <li>• Factors to consider: symptom profile, lifestyle, comorbidities, side effect tolerance</li>
+                  <li>• Regular follow-ups with your healthcare provider are essential</li>
+                  <li>• Dosage may need adjustment over time</li>
+                </ul>
+              </div>
+
+              <div className="bg-pink-50 p-6 rounded-lg">
+                <h4 className="text-lg font-semibold mb-3 text-pink-900">Monitoring & Safety</h4>
+                <ul className="text-sm text-gray-700 space-y-2">
+                  <li>• Regular monitoring of blood pressure and heart rate</li>
+                  <li>• Tracking height and weight in children</li>
+                  <li>• Monitoring for side effects and effectiveness</li>
+                  <li>• Discussing any concerns or changes with your doctor</li>
+                  <li>• Not sharing medications with others</li>
+                  <li>• Storing medications securely</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Medication Myths vs Facts */}
+          <div className="mb-8">
+            <h3 className="text-2xl font-semibold mb-4 text-gray-800 border-b-2 border-blue-200 pb-2">
+              Medication Myths vs. Facts
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-red-50 p-6 rounded-lg border-l-4 border-red-400">
+                <h4 className="text-lg font-semibold mb-3 text-red-900">Common Myths</h4>
+                <ul className="space-y-2 text-gray-700 text-sm">
+                  <li className="flex items-start">
+                    <span className="text-red-600 font-bold mr-2">✗</span>
+                    <span>"ADHD medications are dangerous and addictive"</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-600 font-bold mr-2">✗</span>
+                    <span>"Medications will change your personality"</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-600 font-bold mr-2">✗</span>
+                    <span>"Once you start medication, you'll need it forever"</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-600 font-bold mr-2">✗</span>
+                    <span>"Medications are a 'quick fix' and don't require other treatments"</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-600 font-bold mr-2">✗</span>
+                    <span>"All ADHD medications work the same way"</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-400">
+                <h4 className="text-lg font-semibold mb-3 text-green-900">Facts</h4>
+                <ul className="space-y-2 text-gray-700 text-sm">
+                  <li className="flex items-start">
+                    <span className="text-green-600 font-bold mr-2">✓</span>
+                    <span>When properly prescribed and monitored, ADHD medications are generally safe and effective</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 font-bold mr-2">✓</span>
+                    <span>Medications help manage symptoms but don't fundamentally change who you are</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 font-bold mr-2">✓</span>
+                    <span>Many people can stop or adjust medications as their needs change</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 font-bold mr-2">✓</span>
+                    <span>Medication is most effective when combined with therapy, behavioral strategies, and lifestyle changes</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 font-bold mr-2">✓</span>
+                    <span>Different medications work differently; finding the right one is a personalized process</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Medication and Other Treatments */}
+          <div className="mb-8">
+            <h3 className="text-2xl font-semibold mb-4 text-gray-800 border-b-2 border-blue-200 pb-2">
+              Medication as Part of Comprehensive Treatment
+            </h3>
+            <div className="bg-gradient-to-r from-blue-100 to-purple-100 p-6 rounded-lg">
+              <p className="text-gray-700 mb-4">
+                Medication is often most effective when used as part of a comprehensive treatment plan that may include:
+              </p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <ul className="text-sm text-gray-700 space-y-2">
+                  <li>• <strong>Behavioral therapy</strong> to develop coping strategies</li>
+                  <li>• <strong>Cognitive behavioral therapy (CBT)</strong> for thought patterns</li>
+                  <li>• <strong>Executive function coaching</strong> for organization skills</li>
+                  <li>• <strong>Educational support</strong> and accommodations</li>
+                </ul>
+                <ul className="text-sm text-gray-700 space-y-2">
+                  <li>• <strong>Lifestyle modifications</strong> (exercise, sleep, nutrition)</li>
+                  <li>• <strong>Support groups</strong> and peer connections</li>
+                  <li>• <strong>Family therapy</strong> or parent training</li>
+                  <li>• <strong>Workplace accommodations</strong> for adults</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Talking to Your Doctor */}
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-3 text-blue-900">
+              Talking to Your Healthcare Provider
+            </h3>
+            <p className="text-gray-700 mb-3">
+              If you're considering medication for ADHD, here are some questions to discuss with your healthcare provider:
+            </p>
+            <ul className="text-sm text-gray-700 space-y-2">
+              <li>• What are the potential benefits and risks of medication for my specific situation?</li>
+              <li>• What types of medications are available and how do they differ?</li>
+              <li>• What side effects should I watch for?</li>
+              <li>• How long will it take to see effects?</li>
+              <li>• How will we monitor the medication's effectiveness?</li>
+              <li>• Are there any interactions with other medications or conditions I should know about?</li>
+              <li>• What should I do if I experience side effects?</li>
+              <li>• How long might I need to take medication?</li>
+            </ul>
+            <p className="text-sm text-gray-700 mt-4 font-semibold">
+              Remember: Open communication with your healthcare provider is essential for safe and effective medication management.
+            </p>
+          </div>
+          
+          {/* Learn More Links */}
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <h3 className="text-lg font-semibold mb-3 text-gray-800">Learn More</h3>
+            <div className="flex flex-wrap gap-3">
+              <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                NIMH - ADHD Treatment
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://chadd.org/about-adhd/treatment/" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                CHADD - ADHD Treatment
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.cdc.gov/ncbddd/adhd/treatment.html" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                CDC - ADHD Treatment
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.mayoclinic.org/diseases-conditions/adhd/diagnosis-treatment/drc-20350895" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                Mayo Clinic - ADHD Treatment
+              </a>
+              <span className="text-gray-400">•</span>
+              <a href="https://www.additudemag.com/adhd-medication-guide/" {...EXTERNAL_LINK_ATTRS} className="text-blue-600 hover:text-blue-800 underline text-sm">
+                ADDitude - ADHD Medication Guide
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </main>
+    </>
   );
 }
 
