@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface TrialResult {
   stimulus: 'small' | 'large';
@@ -92,6 +93,9 @@ const inverseErf = (x: number): number => {
 
 export default function TOVAAssessmentPage() {
   const router = useRouter();
+  const locale = useLocale();
+  const t = useTranslations('tova');
+  const tCommon = useTranslations('common');
   const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [currentStimulus, setCurrentStimulus] = useState<'small' | 'large' | null>(null);
@@ -584,28 +588,28 @@ export default function TOVAAssessmentPage() {
       <main className="min-h-screen bg-gray-50 py-8 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl font-bold mb-6 text-center text-gray-900">
-            TOVA Assessment Complete - Detailed Results
+            {t('complete')}
           </h1>
           
           <div className="space-y-6">
             {/* Basic Statistics */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Basic Statistics</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('basicStats.title')}</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Total Trials</p>
+                  <p className="text-sm text-gray-600">{t('basicStats.totalTrials')}</p>
                   <p className="text-2xl font-bold text-gray-900">{metrics.totalTrials}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Half 1 Trials</p>
+                  <p className="text-sm text-gray-600">{t('basicStats.half1Trials')}</p>
                   <p className="text-2xl font-bold text-blue-600">{metrics.half1Trials}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Half 2 Trials</p>
+                  <p className="text-sm text-gray-600">{t('basicStats.half2Trials')}</p>
                   <p className="text-2xl font-bold text-purple-600">{metrics.half2Trials}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Anticipatory Responses</p>
+                  <p className="text-sm text-gray-600">{t('basicStats.anticipatoryResponses')}</p>
                   <p className="text-2xl font-bold text-yellow-600">{metrics.anticipatoryResponses}</p>
                 </div>
               </div>
@@ -614,26 +618,26 @@ export default function TOVAAssessmentPage() {
             {/* Half 1 Results (Infrequent Target) */}
             <div className="bg-white rounded-lg shadow-lg p-6">
               <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-                Half 1: Infrequent Target (Small Square = Target)
+                {t('half1.title')}
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div>
-                  <p className="text-sm text-gray-600">Targets (Small)</p>
+                  <p className="text-sm text-gray-600">{t('half1.targets')}</p>
                   <p className="text-xl font-bold text-blue-600">{metrics.half1Targets}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Non-Targets (Large)</p>
+                  <p className="text-sm text-gray-600">{t('half1.nonTargets')}</p>
                   <p className="text-xl font-bold text-purple-600">{metrics.half1NonTargets}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Omission Errors</p>
+                  <p className="text-sm text-gray-600">{t('half1.omissionErrors')}</p>
                   <p className="text-xl font-bold text-red-600">{metrics.half1OmissionErrors}</p>
                   <p className="text-xs text-gray-500">
                     ({metrics.half1Targets > 0 ? ((metrics.half1OmissionErrors / metrics.half1Targets) * 100).toFixed(1) : 0}%)
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Commission Errors</p>
+                  <p className="text-sm text-gray-600">{t('half1.commissionErrors')}</p>
                   <p className="text-xl font-bold text-orange-600">{metrics.half1CommissionErrors}</p>
                   <p className="text-xs text-gray-500">
                     ({metrics.half1NonTargets > 0 ? ((metrics.half1CommissionErrors / metrics.half1NonTargets) * 100).toFixed(1) : 0}%)
@@ -642,25 +646,25 @@ export default function TOVAAssessmentPage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Hit Reaction Time</p>
+                  <p className="text-sm text-gray-600">{t('half1.hitRT')}</p>
                   <p className="text-xl font-bold text-gray-900">
                     {metrics.half1HitReactionTime > 0 ? `${metrics.half1HitReactionTime}ms` : 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Hit RT SD</p>
+                  <p className="text-sm text-gray-600">{t('half1.hitRTSD')}</p>
                   <p className="text-xl font-bold text-gray-900">
                     {metrics.half1HitReactionTimeSD > 0 ? `${metrics.half1HitReactionTimeSD}ms` : 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Variability (CV%)</p>
+                  <p className="text-sm text-gray-600">{t('half1.variability')}</p>
                   <p className="text-xl font-bold text-gray-900">
                     {metrics.half1Variability > 0 ? `${metrics.half1Variability.toFixed(1)}%` : 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">D-Prime</p>
+                  <p className="text-sm text-gray-600">{t('half1.dPrime')}</p>
                   <p className="text-xl font-bold text-blue-600">
                     {metrics.dPrimeHalf1.toFixed(2)}
                   </p>
@@ -671,26 +675,26 @@ export default function TOVAAssessmentPage() {
             {/* Half 2 Results (Frequent Target) */}
             <div className="bg-white rounded-lg shadow-lg p-6">
               <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-                Half 2: Frequent Target (Large Square = Target)
+                {t('half2.title')}
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div>
-                  <p className="text-sm text-gray-600">Targets (Large)</p>
+                  <p className="text-sm text-gray-600">{t('half2.targets')}</p>
                   <p className="text-xl font-bold text-blue-600">{metrics.half2Targets}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Non-Targets (Small)</p>
+                  <p className="text-sm text-gray-600">{t('half2.nonTargets')}</p>
                   <p className="text-xl font-bold text-purple-600">{metrics.half2NonTargets}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Omission Errors</p>
+                  <p className="text-sm text-gray-600">{t('half2.omissionErrors')}</p>
                   <p className="text-xl font-bold text-red-600">{metrics.half2OmissionErrors}</p>
                   <p className="text-xs text-gray-500">
                     ({metrics.half2Targets > 0 ? ((metrics.half2OmissionErrors / metrics.half2Targets) * 100).toFixed(1) : 0}%)
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Commission Errors</p>
+                  <p className="text-sm text-gray-600">{t('half2.commissionErrors')}</p>
                   <p className="text-xl font-bold text-orange-600">{metrics.half2CommissionErrors}</p>
                   <p className="text-xs text-gray-500">
                     ({metrics.half2NonTargets > 0 ? ((metrics.half2CommissionErrors / metrics.half2NonTargets) * 100).toFixed(1) : 0}%)
@@ -699,25 +703,25 @@ export default function TOVAAssessmentPage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Hit Reaction Time</p>
+                  <p className="text-sm text-gray-600">{t('half2.hitRT')}</p>
                   <p className="text-xl font-bold text-gray-900">
                     {metrics.half2HitReactionTime > 0 ? `${metrics.half2HitReactionTime}ms` : 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Hit RT SD</p>
+                  <p className="text-sm text-gray-600">{t('half2.hitRTSD')}</p>
                   <p className="text-xl font-bold text-gray-900">
                     {metrics.half2HitReactionTimeSD > 0 ? `${metrics.half2HitReactionTimeSD}ms` : 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Variability (CV%)</p>
+                  <p className="text-sm text-gray-600">{t('half2.variability')}</p>
                   <p className="text-xl font-bold text-gray-900">
                     {metrics.half2Variability > 0 ? `${metrics.half2Variability.toFixed(1)}%` : 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">D-Prime</p>
+                  <p className="text-sm text-gray-600">{t('half2.dPrime')}</p>
                   <p className="text-xl font-bold text-blue-600">
                     {metrics.dPrimeHalf2.toFixed(2)}
                   </p>
@@ -727,28 +731,28 @@ export default function TOVAAssessmentPage() {
 
             {/* Overall Results */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Overall Results</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('overall.title')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Overall Hit Reaction Time</p>
+                  <p className="text-sm text-gray-600">{t('overall.hitRT')}</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {metrics.overallHitReactionTime > 0 ? `${metrics.overallHitReactionTime}ms` : 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Overall Variability (CV%)</p>
+                  <p className="text-sm text-gray-600">{t('overall.variability')}</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {metrics.overallVariability > 0 ? `${metrics.overallVariability.toFixed(1)}%` : 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Overall D-Prime</p>
+                  <p className="text-sm text-gray-600">{t('overall.dPrime')}</p>
                   <p className="text-2xl font-bold text-blue-600">
                     {metrics.dPrimeOverall.toFixed(2)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Response Time to Correct</p>
+                  <p className="text-sm text-gray-600">{t('overall.responseTimeToCorrect')}</p>
                   <p className="text-2xl font-bold text-green-600">
                     {metrics.responseTimeToCorrect > 0 ? `${metrics.responseTimeToCorrect}ms` : 'N/A'}
                   </p>
@@ -756,11 +760,11 @@ export default function TOVAAssessmentPage() {
               </div>
               <div className="mt-4 grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Total Omission Errors</p>
+                  <p className="text-sm text-gray-600">{t('overall.totalOmissionErrors')}</p>
                   <p className="text-xl font-bold text-red-600">{metrics.overallOmissionErrors}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Total Commission Errors</p>
+                  <p className="text-sm text-gray-600">{t('overall.totalCommissionErrors')}</p>
                   <p className="text-xl font-bold text-orange-600">{metrics.overallCommissionErrors}</p>
                 </div>
               </div>
@@ -775,20 +779,18 @@ export default function TOVAAssessmentPage() {
               return (
                 <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-blue-200">
                   <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-                    ADHD-Related Performance Analysis
+                    {t('adhdAnalysis.title')}
                   </h2>
                   
                   <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                     <p className="text-sm text-yellow-800">
-                      <strong>Important Disclaimer:</strong> This analysis is for informational purposes only and is not a diagnostic tool. 
-                      ADHD diagnosis requires comprehensive clinical evaluation by a qualified healthcare professional. 
-                      Test performance can be influenced by many factors including fatigue, anxiety, motivation, and other conditions.
+                      {t('adhdAnalysis.disclaimer')}
                     </p>
                   </div>
 
                   <div className="mb-6">
                     <div className="flex items-center gap-4 mb-4">
-                      <h3 className="text-xl font-semibold text-gray-700">Overall Risk Level:</h3>
+                      <h3 className="text-xl font-semibold text-gray-700">{t('adhdAnalysis.overallRisk')}</h3>
                       <span className={`px-4 py-2 rounded-lg font-bold text-lg ${
                         riskColor === 'red' ? 'bg-red-100 text-red-800' :
                         riskColor === 'orange' ? 'bg-orange-100 text-orange-800' :
@@ -797,14 +799,14 @@ export default function TOVAAssessmentPage() {
                         {adhdAnalysis.overallRisk}
                       </span>
                       <span className="text-sm text-gray-600">
-                        (Risk Score: {adhdAnalysis.riskScore}/9)
+                        {t('adhdAnalysis.riskScore', { score: adhdAnalysis.riskScore })}
                       </span>
                     </div>
                   </div>
 
                   {adhdAnalysis.indicators.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="text-lg font-semibold mb-3 text-gray-700">Identified Indicators:</h3>
+                      <h3 className="text-lg font-semibold mb-3 text-gray-700">{t('adhdAnalysis.indicators')}</h3>
                       <ul className="space-y-2">
                         {adhdAnalysis.indicators.map((indicator, idx) => (
                           <li key={idx} className="flex items-start">
@@ -818,7 +820,7 @@ export default function TOVAAssessmentPage() {
 
                   {adhdAnalysis.concerns.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="text-lg font-semibold mb-3 text-gray-700">Performance Concerns:</h3>
+                      <h3 className="text-lg font-semibold mb-3 text-gray-700">{t('adhdAnalysis.concerns')}</h3>
                       <ul className="space-y-2">
                         {adhdAnalysis.concerns.map((concern, idx) => (
                           <li key={idx} className="flex items-start">
@@ -832,61 +834,58 @@ export default function TOVAAssessmentPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600 mb-1">Overall Omission Rate</p>
+                      <p className="text-sm text-gray-600 mb-1">{t('adhdAnalysis.overallOmissionRate')}</p>
                       <p className="text-2xl font-bold text-gray-900">{adhdAnalysis.overallOmissionRate}%</p>
                       <p className="text-xs text-gray-500 mt-1">
-                        {adhdAnalysis.overallOmissionRate > 15 ? 'Elevated (Inattention)' : 
-                         adhdAnalysis.overallOmissionRate > 10 ? 'Moderate' : 'Normal'}
+                        {adhdAnalysis.overallOmissionRate > 15 ? t('adhdAnalysis.elevatedInattention') : 
+                         adhdAnalysis.overallOmissionRate > 10 ? t('adhdAnalysis.moderate') : t('adhdAnalysis.normal')}
                       </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600 mb-1">Overall Commission Rate</p>
+                      <p className="text-sm text-gray-600 mb-1">{t('adhdAnalysis.overallCommissionRate')}</p>
                       <p className="text-2xl font-bold text-gray-900">{adhdAnalysis.overallCommissionRate}%</p>
                       <p className="text-xs text-gray-500 mt-1">
-                        {adhdAnalysis.overallCommissionRate > 12 ? 'Elevated (Impulsivity)' : 
-                         adhdAnalysis.overallCommissionRate > 8 ? 'Moderate' : 'Normal'}
+                        {adhdAnalysis.overallCommissionRate > 12 ? t('adhdAnalysis.elevatedImpulsivity') : 
+                         adhdAnalysis.overallCommissionRate > 8 ? t('adhdAnalysis.moderate') : t('adhdAnalysis.normal')}
                       </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600 mb-1">Half 1 Omission Rate</p>
+                      <p className="text-sm text-gray-600 mb-1">{t('adhdAnalysis.half1OmissionRate')}</p>
                       <p className="text-2xl font-bold text-gray-900">{adhdAnalysis.half1OmissionRate}%</p>
                       <p className="text-xs text-gray-500 mt-1">
-                        {adhdAnalysis.half1OmissionRate > 20 ? 'Elevated (Infrequent targets)' : 
-                         adhdAnalysis.half1OmissionRate > 10 ? 'Moderate' : 'Normal'}
+                        {adhdAnalysis.half1OmissionRate > 20 ? t('adhdAnalysis.elevatedInfrequent') : 
+                         adhdAnalysis.half1OmissionRate > 10 ? t('adhdAnalysis.moderate') : t('adhdAnalysis.normal')}
                       </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600 mb-1">Half 2 Commission Rate</p>
+                      <p className="text-sm text-gray-600 mb-1">{t('adhdAnalysis.half2CommissionRate')}</p>
                       <p className="text-2xl font-bold text-gray-900">{adhdAnalysis.half2CommissionRate}%</p>
                       <p className="text-xs text-gray-500 mt-1">
-                        {adhdAnalysis.half2CommissionRate > 15 ? 'Elevated (Frequent targets)' : 
-                         adhdAnalysis.half2CommissionRate > 8 ? 'Moderate' : 'Normal'}
+                        {adhdAnalysis.half2CommissionRate > 15 ? t('adhdAnalysis.elevatedFrequent') : 
+                         adhdAnalysis.half2CommissionRate > 8 ? t('adhdAnalysis.moderate') : t('adhdAnalysis.normal')}
                       </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600 mb-1">Reaction Time Variability</p>
+                      <p className="text-sm text-gray-600 mb-1">{t('adhdAnalysis.variability')}</p>
                       <p className="text-2xl font-bold text-gray-900">{adhdAnalysis.variability}%</p>
                       <p className="text-xs text-gray-500 mt-1">
-                        {adhdAnalysis.variability > 25 ? 'High (Inconsistent)' : 
-                         adhdAnalysis.variability > 18 ? 'Moderate' : 'Normal'}
+                        {adhdAnalysis.variability > 25 ? t('adhdAnalysis.highInconsistent') : 
+                         adhdAnalysis.variability > 18 ? t('adhdAnalysis.moderate') : t('adhdAnalysis.normal')}
                       </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600 mb-1">D-Prime (Discriminability)</p>
+                      <p className="text-sm text-gray-600 mb-1">{t('adhdAnalysis.dPrime')}</p>
                       <p className="text-2xl font-bold text-gray-900">{adhdAnalysis.dPrime.toFixed(2)}</p>
                       <p className="text-xs text-gray-500 mt-1">
-                        {adhdAnalysis.dPrime < 1.5 ? 'Reduced' : 
-                         adhdAnalysis.dPrime < 2.0 ? 'Moderate' : 'Good'}
+                        {adhdAnalysis.dPrime < 1.5 ? t('adhdAnalysis.reduced') : 
+                         adhdAnalysis.dPrime < 2.0 ? t('adhdAnalysis.moderate') : t('adhdAnalysis.good')}
                       </p>
                     </div>
                   </div>
 
                   <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                     <p className="text-sm text-blue-800">
-                      <strong>Next Steps:</strong> If you have concerns about attention or impulse control, 
-                      consider consulting with a healthcare professional who specializes in ADHD assessment. 
-                      A comprehensive evaluation typically includes clinical interviews, behavioral observations, 
-                      and may incorporate multiple assessment tools.
+                      {t('adhdAnalysis.nextSteps')}
                     </p>
                   </div>
                 </div>
@@ -896,10 +895,10 @@ export default function TOVAAssessmentPage() {
 
           <div className="flex gap-4 justify-center mt-8">
             <button
-              onClick={() => router.push('/')}
+              onClick={() => router.push(`/${locale}`)}
               className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
             >
-              Back to Home
+              {tCommon('backToHome')}
             </button>
             <button
               onClick={() => {
@@ -913,7 +912,7 @@ export default function TOVAAssessmentPage() {
               }}
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Retake Assessment
+              {tCommon('retakeAssessment')}
             </button>
           </div>
         </div>
@@ -926,59 +925,41 @@ export default function TOVAAssessmentPage() {
       <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-white">
         <div className="max-w-2xl w-full bg-gray-50 rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold mb-6 text-center text-gray-900">
-            Test of Variables of Attention (TOVA)
+            {t('title')}
           </h1>
           
           <div className="space-y-4 mb-6">
             <div className="bg-white p-4 rounded-lg shadow">
-              <h2 className="text-xl font-semibold mb-3 text-gray-800">Instructions</h2>
+              <h2 className="text-xl font-semibold mb-3 text-gray-800">{t('instructions.title')}</h2>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span>You will see two types of squares appear on the screen: <strong>small</strong> and <strong>large</strong>.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span><strong>First Half (10.8 minutes):</strong> Press SPACEBAR or CLICK when you see a <strong>SMALL</strong> square. Do NOT respond to large squares.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span><strong>Second Half (10.8 minutes):</strong> Press SPACEBAR or CLICK when you see a <strong>LARGE</strong> square. Do NOT respond to small squares.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span>The test will automatically switch to the second half after 10.8 minutes.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span>Total duration: <strong>21.6 minutes</strong>.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span>Respond as quickly and accurately as possible.</span>
-                </li>
+                {(t.raw('instructions.items') as string[]).map((item, idx) => (
+                  <li key={idx} className="flex items-start">
+                    <span className="font-bold mr-2">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
               <p className="text-sm text-blue-800">
-                <strong>Tip:</strong> Pay attention to the indicator showing which half you're in. The target changes between halves!
+                {t('instructions.tip')}
               </p>
             </div>
           </div>
 
           <div className="flex gap-4">
             <button
-              onClick={() => router.push('/')}
+              onClick={() => router.push(`/${locale}`)}
               className="flex-1 px-6 py-4 bg-gray-600 text-white rounded-lg font-semibold text-lg hover:bg-gray-700 transition-colors shadow-lg hover:shadow-xl"
             >
-              Back to Home
+              {tCommon('backToHome')}
             </button>
             <button
               onClick={startAssessment}
               className="flex-1 px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
             >
-              Start TOVA Test
+              {t('start')}
             </button>
           </div>
         </div>
@@ -991,17 +972,17 @@ export default function TOVAAssessmentPage() {
       {/* Timer and Stats */}
       <div className="absolute top-4 left-4 right-4 flex justify-between items-center">
         <div className="bg-gray-100 px-4 py-2 rounded-lg shadow">
-          <p className="text-sm text-gray-600">Time Remaining</p>
+          <p className="text-sm text-gray-600">{t('timeRemaining')}</p>
           <p className="text-2xl font-bold text-gray-900">{formatTime(timeRemaining)}</p>
         </div>
         <div className="bg-gray-100 px-4 py-2 rounded-lg shadow">
-          <p className="text-sm text-gray-600">Half</p>
+          <p className="text-sm text-gray-600">{t('half')}</p>
           <p className="text-2xl font-bold text-blue-600">
-            {currentHalf} / 2
+            {t('currentHalf', { current: currentHalf })}
           </p>
         </div>
         <div className="bg-gray-100 px-4 py-2 rounded-lg shadow">
-          <p className="text-sm text-gray-600">Trials</p>
+          <p className="text-sm text-gray-600">{t('trials')}</p>
           <p className="text-2xl font-bold text-gray-900">
             {currentTrialNumber}
           </p>
@@ -1017,8 +998,8 @@ export default function TOVAAssessmentPage() {
             currentHalf === 1 ? 'text-blue-900' : 'text-purple-900'
           }`}>
             {currentHalf === 1 
-              ? 'Half 1: Press for SMALL squares' 
-              : 'Half 2: Press for LARGE squares'}
+              ? t('half1Instruction')
+              : t('half2Instruction')}
           </p>
         </div>
       </div>
@@ -1048,8 +1029,8 @@ export default function TOVAAssessmentPage() {
           <p className="text-sm text-blue-800">
             <strong>
               {currentHalf === 1 
-                ? 'Press SPACEBAR or CLICK for SMALL squares' 
-                : 'Press SPACEBAR or CLICK for LARGE squares'}
+                ? t('pressForSmall')
+                : t('pressForLarge')}
             </strong>
           </p>
         </div>

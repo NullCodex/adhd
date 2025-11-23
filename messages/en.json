@@ -1,0 +1,835 @@
+{
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "french": "French",
+    "backToHome": "Back to Home",
+    "learnMore": "Learn More",
+    "learnMoreAbout": "Learn More About ADHD Assessments",
+    "notAnswered": "Not answered",
+    "retakeAssessment": "Retake Assessment",
+    "submitAssessment": "Submit Assessment",
+    "questionsAnswered": "{count} of {total} questions answered"
+  },
+  "nav": {
+    "whatIsAdhd": "What is ADHD?",
+    "statistics": "Statistics",
+    "assessments": "Assessments",
+    "aboutAssessments": "About Tests",
+    "otherAssessments": "Other Tools",
+    "understandingAdhd": "Understanding ADHD",
+    "medications": "Medications"
+  },
+  "home": {
+    "title": "ADHD Assessment Platform",
+    "subtitle": "Comprehensive assessment tools to help understand attention, focus, and impulse control patterns",
+    "whatIsAdhd": {
+      "title": "What is ADHD?",
+      "description": "Attention-Deficit/Hyperactivity Disorder (ADHD) is a neurodevelopmental disorder characterized by persistent patterns of inattention, hyperactivity, and impulsivity that interfere with functioning or development. ADHD affects both children and adults and can impact various aspects of daily life including work, school, relationships, and self-esteem.",
+      "inattention": {
+        "title": "Inattention",
+        "description": "Difficulty sustaining attention, following through on tasks, organizing activities, and being easily distracted by external stimuli."
+      },
+      "hyperactivity": {
+        "title": "Hyperactivity",
+        "description": "Excessive fidgeting, restlessness, difficulty staying seated, and feeling the need to be constantly in motion."
+      },
+      "impulsivity": {
+        "title": "Impulsivity",
+        "description": "Acting without thinking, interrupting others, difficulty waiting turns, and making hasty decisions without considering consequences."
+      },
+      "learnMoreTitle": "Learn More",
+      "links": {
+        "nimh": "NIMH - ADHD Information",
+        "cdc": "CDC - ADHD Resources",
+        "chadd": "CHADD - About ADHD",
+        "mayo": "Mayo Clinic - ADHD Overview"
+      }
+    },
+    "statistics": {
+      "title": "ADHD Statistics & Facts",
+      "childrenWorldwide": "of children worldwide are diagnosed with ADHD",
+      "adultsEstimated": "of adults are estimated to have ADHD",
+      "symptomsIntoAdulthood": "of children with ADHD continue to have symptoms into adulthood",
+      "maleToFemaleRatio": "ratio of males to females diagnosed with ADHD in childhood",
+      "commonComorbidities": {
+        "title": "Common Comorbidities",
+        "description": "ADHD often co-occurs with other conditions including anxiety disorders (25-40%), depression (20-30%), learning disabilities (20-30%), and oppositional defiant disorder."
+      },
+      "geneticFactors": {
+        "title": "Genetic Factors",
+        "description": "ADHD has a strong genetic component with heritability estimated at 70-80%. If a parent has ADHD, their child has a 25-35% chance of also having ADHD."
+      },
+      "learnMoreTitle": "Learn More",
+      "links": {
+        "cdcData": "CDC - ADHD Data & Statistics",
+        "nimhStats": "NIMH - ADHD Statistics",
+        "chaddFacts": "CHADD - ADHD Facts & Statistics",
+        "who": "WHO - ADHD Fact Sheet"
+      }
+    },
+    "assessments": {
+      "title": "Available Assessments",
+      "questionnaire": {
+        "title": "Questionnaire Assessment",
+        "description": "Complete the 18-question ADHD assessment questionnaire to screen for symptoms.",
+        "features": {
+          "selfReport": "Self-report screening tool",
+          "quick": "Quick assessment (~5-10 minutes)",
+          "assesses": "Assesses inattentive and hyperactive-impulsive symptoms"
+        },
+        "button": "Start Questionnaire"
+      },
+      "cpt": {
+        "title": "CPT-3 Assessment",
+        "description": "Conners Continuous Performance Test - objective measurement of attention and impulse control.",
+        "features": {
+          "duration": "14 minutes duration",
+          "trials": "360 trials",
+          "measures": "Measures sustained attention and response inhibition"
+        },
+        "button": "Start CPT Test"
+      },
+      "tova": {
+        "title": "TOVA Assessment",
+        "description": "Test of Variables of Attention - measures attention and impulse control with geometric shapes.",
+        "features": {
+          "duration": "21.6 minutes duration",
+          "halves": "Two halves (infrequent vs frequent targets)",
+          "differentiates": "Differentiates between inattention and impulsivity"
+        },
+        "button": "Start TOVA Test"
+      },
+      "learnMoreTitle": "Learn More About ADHD Assessments",
+      "links": {
+        "chaddDiagnosis": "CHADD - ADHD Diagnosis in Adults",
+        "cdcDiagnosis": "CDC - Diagnosing ADHD",
+        "additude": "ADDitude - ADHD Testing Guide"
+      }
+    },
+    "aboutAssessments": {
+      "title": "About the Assessments",
+      "intro": "This platform provides multiple evidence-based assessment tools for ADHD screening and evaluation. Each method has its own strengths and limitations, and none should be used as a standalone diagnostic tool.",
+      "questionnaire": {
+        "title": "Questionnaire Assessment",
+        "purpose": "Purpose: This 18-question self-report screening tool is designed to identify symptoms consistent with ADHD in adults. It assesses both inattentive and hyperactive-impulsive symptoms across different life domains. The questionnaire is divided into two parts: Part A (first 6 questions) focuses on the most predictive symptoms for ADHD screening, while Part B (remaining 12 questions) provides additional clinical information.",
+        "limitationsTitle": "Limitations:",
+        "limitations": [
+          "Self-report bias may affect accuracy",
+          "Screening tool only, not a diagnostic instrument",
+          "May not capture all ADHD symptoms or subtypes",
+          "Subjective responses can vary based on self-awareness"
+        ]
+      },
+      "cpt": {
+        "title": "CPT-3 Assessment",
+        "purpose": "Purpose: The Conners Continuous Performance Test 3rd Edition (CPT-3) is a computerized assessment that objectively measures attention and impulse control. During the 14-minute test, participants respond to target letters while inhibiting responses to non-targets. The test evaluates sustained attention, response inhibition, vigilance, and consistency of performance over time.",
+        "limitationsTitle": "Limitations:",
+        "limitations": [
+          "May not detect all ADHD subtypes equally well",
+          "Performance can be influenced by factors other than ADHD (fatigue, motivation, anxiety, etc.)",
+          "Not a standalone diagnostic tool - requires clinical interpretation",
+          "Requires proper administration conditions and environment"
+        ]
+      },
+      "tova": {
+        "title": "TOVA Assessment",
+        "purpose": "Purpose: The Test of Variables of Attention (TOVA) is a computerized continuous performance test that measures attention and impulse control using simple geometric shapes. The test consists of two halves: the first half presents infrequent targets to assess attention when targets are rare, while the second half presents frequent targets to assess impulse control when non-targets are rare.",
+        "limitationsTitle": "Limitations:",
+        "limitations": [
+          "Can produce false positives or false negatives",
+          "Performance can vary based on environmental factors and distractions",
+          "Not sufficient alone for diagnosis - should be combined with other assessments",
+          "May be affected by practice effects if repeated"
+        ]
+      },
+      "disclaimer": {
+        "title": "⚠️ Important Disclaimer",
+        "text": "These assessments are screening tools and should not replace professional medical evaluation. A comprehensive ADHD diagnosis requires clinical assessment by a qualified healthcare professional, including medical history, physical examination, and consideration of multiple information sources. If you have concerns about ADHD, please consult with a healthcare provider."
+      },
+      "learnMoreTitle": "Learn More",
+      "links": {
+        "chadd": "CHADD - ADHD Diagnosis",
+        "apa": "APA - DSM-5 ADHD Criteria",
+        "cdc": "CDC - ADHD Diagnosis Guidelines"
+      }
+    },
+    "otherAssessments": {
+      "title": "Other ADHD Assessment Tools",
+      "intro": "While this platform focuses on specific assessments, there are many other validated tools used in ADHD evaluation. The following are some commonly used assessments that are not currently available on this platform:",
+      "ratingScales": {
+        "title": "Rating Scales & Questionnaires",
+        "tools": {
+          "conners": {
+            "name": "Conners Rating Scales (CRS):",
+            "description": "Comprehensive rating scales for parents, teachers, and self-report. Available in multiple versions (Conners 3, Conners CBRS) for different age groups."
+          },
+          "vanderbilt": {
+            "name": "Vanderbilt Assessment Scales:",
+            "description": "Parent and teacher rating scales commonly used in pediatric settings to assess ADHD symptoms and related impairments."
+          },
+          "adhdrs": {
+            "name": "ADHD Rating Scale (ADHD-RS):",
+            "description": "Standardized rating scale based on DSM criteria, available in versions for children and adults."
+          },
+          "asrs": {
+            "name": "Adult ADHD Self-Report Scale (ASRS):",
+            "description": "WHO-developed screening tool for adult ADHD, available in both full and abbreviated versions."
+          },
+          "badds": {
+            "name": "Brown Attention-Deficit Disorder Scales (BADDS):",
+            "description": "Comprehensive assessment focusing on executive function deficits associated with ADHD."
+          },
+          "baars": {
+            "name": "Barkley Adult ADHD Rating Scale (BAARS):",
+            "description": "Self-report and observer rating scales specifically designed for adult ADHD assessment."
+          },
+          "wurs": {
+            "name": "Wender Utah Rating Scale (WURS):",
+            "description": "Retrospective self-report scale assessing childhood ADHD symptoms in adults."
+          },
+          "snap": {
+            "name": "SNAP Rating Scale:",
+            "description": "Swanson, Nolan, and Pelham rating scale for assessing ADHD symptoms and related behaviors."
+          }
+        }
+      },
+      "neuropsychological": {
+        "title": "Neuropsychological & Performance Tests",
+        "tools": {
+          "iva2": {
+            "name": "IVA-2 (Integrated Visual and Auditory CPT):",
+            "description": "Continuous performance test that measures both visual and auditory attention, providing comprehensive assessment of attention deficits."
+          },
+          "qbtest": {
+            "name": "QbTest:",
+            "description": "Computerized test combining attention and activity measurement using infrared motion tracking to assess hyperactivity."
+          },
+          "tea": {
+            "name": "Test of Everyday Attention (TEA):",
+            "description": "Battery of tests assessing different aspects of attention including selective, sustained, and divided attention."
+          },
+          "dkefs": {
+            "name": "Delis-Kaplan Executive Function System (D-KEFS):",
+            "description": "Comprehensive assessment of executive functions including working memory, cognitive flexibility, and inhibition."
+          },
+          "brief": {
+            "name": "Behavior Rating Inventory of Executive Function (BRIEF):",
+            "description": "Rating scale assessing executive function behaviors in daily life, available for children and adults."
+          },
+          "kcpt": {
+            "name": "Conners Kiddie Continuous Performance Test (K-CPT):",
+            "description": "Age-appropriate version of the CPT designed specifically for children ages 4-5."
+          },
+          "stroop": {
+            "name": "Stroop Color-Word Test:",
+            "description": "Classic neuropsychological test measuring cognitive inhibition and selective attention."
+          },
+          "trail": {
+            "name": "Trail Making Test:",
+            "description": "Assessment of visual attention, task switching, and processing speed, commonly used in ADHD evaluations."
+          }
+        }
+      },
+      "note": "Note: This list represents only a sample of available ADHD assessment tools. A comprehensive ADHD evaluation typically involves multiple assessment methods, clinical interviews, behavioral observations, and consideration of developmental history. The choice of assessment tools depends on the individual's age, specific concerns, and the clinical context. Always consult with qualified healthcare professionals for proper assessment and diagnosis.",
+      "learnMoreTitle": "Learn More",
+      "links": {
+        "chadd": "CHADD - Assessment Tools",
+        "additude": "ADDitude - ADHD Testing Resources",
+        "apa": "APA - ADHD Resources"
+      }
+    },
+    "understandingAdhd": {
+      "title": "Understanding ADHD",
+      "subtypes": {
+        "title": "ADHD Subtypes",
+        "inattentive": {
+          "title": "Predominantly Inattentive (ADHD-I)",
+          "description": "Characterized primarily by difficulties with attention and focus, with fewer hyperactive or impulsive symptoms.",
+          "symptomsTitle": "Common symptoms include:",
+          "symptoms": [
+            "Difficulty sustaining attention",
+            "Easily distracted",
+            "Forgetfulness",
+            "Poor organization",
+            "Difficulty following instructions",
+            "Losing things frequently"
+          ]
+        },
+        "hyperactive": {
+          "title": "Predominantly Hyperactive-Impulsive (ADHD-H)",
+          "description": "Characterized by hyperactivity and impulsivity, with fewer inattentive symptoms.",
+          "symptomsTitle": "Common symptoms include:",
+          "symptoms": [
+            "Fidgeting and restlessness",
+            "Difficulty staying seated",
+            "Excessive talking",
+            "Interrupting others",
+            "Difficulty waiting turns",
+            "Acting without thinking"
+          ]
+        },
+        "combined": {
+          "title": "Combined Type (ADHD-C)",
+          "description": "The most common subtype, featuring significant symptoms of both inattention and hyperactivity-impulsivity.",
+          "featuresTitle": "Features:",
+          "features": [
+            "Meets criteria for both inattention and hyperactivity",
+            "Most commonly diagnosed in children",
+            "May present differently in adults",
+            "Often requires comprehensive treatment"
+          ]
+        }
+      },
+      "lifeStages": {
+        "title": "Symptoms Across Life Stages",
+        "childhood": {
+          "title": "Childhood & Adolescence",
+          "symptoms": [
+            "Academic difficulties, poor grades despite intelligence",
+            "Behavioral problems in school",
+            "Social challenges and peer relationship difficulties",
+            "Difficulty following rules and routines",
+            "Risk-taking behaviors"
+          ]
+        },
+        "adulthood": {
+          "title": "Adulthood",
+          "symptoms": [
+            "Work performance and career challenges",
+            "Time management and organization difficulties",
+            "Relationship and communication issues",
+            "Financial management problems",
+            "Emotional regulation challenges"
+          ]
+        }
+      },
+      "causes": {
+        "title": "Causes and Risk Factors",
+        "genetic": {
+          "title": "Genetic Factors",
+          "description": "ADHD has a strong genetic component with heritability estimated at 70-80%. If a parent has ADHD, their child has a 25-35% chance of also having ADHD.",
+          "points": [
+            "Family history is a significant risk factor",
+            "Multiple genes are involved, not a single gene",
+            "Genetic variations affect neurotransmitter systems"
+          ]
+        },
+        "environmental": {
+          "title": "Environmental Factors",
+          "description": "While genetics play the primary role, certain environmental factors may contribute to ADHD risk.",
+          "points": [
+            "Premature birth or low birth weight",
+            "Prenatal exposure to alcohol, tobacco, or drugs",
+            "Lead exposure in early childhood",
+            "Brain injuries"
+          ]
+        }
+      },
+      "treatment": {
+        "title": "Treatment Options",
+        "medication": {
+          "title": "Medication",
+          "description": "Medications can be effective in managing ADHD symptoms, but should always be prescribed and monitored by a healthcare professional.",
+          "typesTitle": "Types include:",
+          "types": [
+            "Stimulants: Most commonly prescribed (methylphenidate, amphetamines)",
+            "Non-stimulants: Alternative option (atomoxetine, guanfacine)",
+            "Antidepressants: Sometimes used for comorbid conditions"
+          ],
+          "note": "Medication effectiveness varies by individual and should be part of a comprehensive treatment plan."
+        },
+        "therapy": {
+          "title": "Therapy & Behavioral Interventions",
+          "description": "Various therapeutic approaches can help individuals develop coping strategies and improve functioning.",
+          "types": [
+            "Cognitive Behavioral Therapy (CBT): Addresses thought patterns and behaviors",
+            "Behavioral Therapy: Focuses on modifying behaviors and developing skills",
+            "Parent Training: Helps parents support children with ADHD",
+            "Social Skills Training: Improves interpersonal relationships",
+            "Executive Function Coaching: Develops organization and planning skills"
+          ]
+        }
+      },
+      "coping": {
+        "title": "Coping Strategies & Accommodations",
+        "students": {
+          "title": "For Students",
+          "strategies": [
+            "Extended time on tests",
+            "Preferential seating",
+            "Note-taking assistance",
+            "Breaks during long tasks",
+            "Organizational support",
+            "Reduced homework load"
+          ]
+        },
+        "adults": {
+          "title": "For Adults at Work",
+          "strategies": [
+            "Flexible work schedules",
+            "Quiet workspace",
+            "Written instructions",
+            "Task prioritization support",
+            "Regular check-ins",
+            "Noise-canceling headphones"
+          ]
+        },
+        "daily": {
+          "title": "Daily Life Strategies",
+          "strategies": [
+            "Use calendars and reminders",
+            "Break tasks into smaller steps",
+            "Establish routines",
+            "Minimize distractions",
+            "Regular exercise",
+            "Adequate sleep"
+          ]
+        }
+      },
+      "myths": {
+        "title": "Common Myths vs. Facts",
+        "mythsTitle": "Myths",
+        "myths": [
+          "\"ADHD is caused by bad parenting or too much sugar\"",
+          "\"ADHD only affects children and they grow out of it\"",
+          "\"People with ADHD just need to try harder\"",
+          "\"ADHD medication is dangerous and addictive\"",
+          "\"ADHD isn't a real condition\""
+        ],
+        "factsTitle": "Facts",
+        "facts": [
+          "ADHD is a neurobiological condition with strong genetic components",
+          "ADHD persists into adulthood for 60% of those diagnosed in childhood",
+          "ADHD involves real brain differences that affect executive function",
+          "When properly prescribed and monitored, ADHD medications are safe and effective",
+          "ADHD is recognized by major medical organizations worldwide"
+        ]
+      },
+      "gettingHelp": {
+        "title": "Getting Help and Support",
+        "professional": {
+          "title": "Professional Resources",
+          "resources": [
+            "Consult with a psychiatrist, psychologist, or neurologist specializing in ADHD",
+            "Seek comprehensive evaluation including clinical interview and assessment tools",
+            "Work with therapists trained in ADHD-specific interventions",
+            "Consider ADHD coaches for practical skill development"
+          ]
+        },
+        "support": {
+          "title": "Support Networks",
+          "resources": [
+            "Join ADHD support groups (in-person or online)",
+            "Connect with ADHD advocacy organizations",
+            "Educate family and friends about ADHD",
+            "Access educational resources and research"
+          ]
+        },
+        "remember": "Remember: Early diagnosis and appropriate treatment can significantly improve quality of life. If you suspect you or a loved one may have ADHD, don't hesitate to seek professional evaluation. With proper support, individuals with ADHD can thrive and succeed in all areas of life.",
+        "learnMoreTitle": "Learn More",
+        "links": {
+          "chadd": "CHADD - Understanding ADHD",
+          "nimh": "NIMH - ADHD Information",
+          "additude": "ADDitude Magazine",
+          "mayo": "Mayo Clinic - ADHD"
+        }
+      }
+    },
+    "medications": {
+      "title": "ADHD Medications",
+      "intro": "Medication can be an effective component of ADHD treatment when prescribed and monitored by a qualified healthcare professional. This section provides information about common ADHD medications, their mechanisms, and important considerations.",
+      "disclaimer": {
+        "title": "⚠️ Important Medical Disclaimer",
+        "text": "The information provided here is for educational purposes only and should not replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider before starting, stopping, or changing any medication. Only licensed healthcare professionals can prescribe ADHD medications after a proper evaluation."
+      },
+      "stimulants": {
+        "title": "Stimulant Medications",
+        "description": "Stimulants are the most commonly prescribed medications for ADHD and are considered first-line treatment. They work by increasing the levels of certain neurotransmitters (dopamine and norepinephrine) in the brain, which helps improve attention, focus, and impulse control.",
+        "methylphenidate": {
+          "title": "Methylphenidate-Based Medications",
+          "description": "These medications are available in various formulations with different durations of action.",
+          "medications": [
+            "Ritalin (immediate-release): Short-acting, typically lasts 3-4 hours",
+            "Ritalin LA (long-acting): Extended-release, lasts 8-12 hours",
+            "Concerta (extended-release): Once-daily dosing, lasts 10-12 hours",
+            "Daytrana (patch): Transdermal patch, provides consistent delivery",
+            "Focalin / Focalin XR: Dexmethylphenidate, similar to methylphenidate",
+            "Quillivant XR / Quillichew ER: Liquid and chewable formulations"
+          ]
+        },
+        "amphetamine": {
+          "title": "Amphetamine-Based Medications",
+          "description": "These medications also increase dopamine and norepinephrine, with slightly different mechanisms.",
+          "medications": [
+            "Adderall / Adderall XR: Mixed amphetamine salts, immediate and extended-release",
+            "Vyvanse (lisdexamfetamine): Prodrug that converts to dextroamphetamine, long-acting",
+            "Dexedrine / Dexedrine Spansule: Dextroamphetamine, immediate and extended-release",
+            "Evekeo: Racemic amphetamine sulfate",
+            "Mydayis: Triple-bead delivery system, lasts up to 16 hours"
+          ]
+        },
+        "note": "Note: Stimulant medications are controlled substances and require careful monitoring. Common side effects may include decreased appetite, sleep difficulties, headaches, and increased heart rate or blood pressure. These medications should not be used by individuals with certain heart conditions, glaucoma, or a history of substance abuse."
+      },
+      "nonStimulants": {
+        "title": "Non-Stimulant Medications",
+        "description": "Non-stimulant medications may be preferred when stimulants are not suitable, cause intolerable side effects, or when there are concerns about abuse potential. They work through different mechanisms than stimulants.",
+        "atomoxetine": {
+          "title": "Atomoxetine (Strattera)",
+          "description": "A selective norepinephrine reuptake inhibitor (SNRI) that is not a controlled substance.",
+          "points": [
+            "Takes 2-4 weeks to see full effects",
+            "Once-daily dosing",
+            "May help with anxiety symptoms",
+            "Common side effects: nausea, fatigue, decreased appetite",
+            "May cause liver problems in rare cases"
+          ]
+        },
+        "alpha2": {
+          "title": "Alpha-2 Agonists",
+          "description": "These medications work by affecting norepinephrine receptors in the prefrontal cortex.",
+          "medications": [
+            "Guanfacine (Intuniv, Tenex): Extended-release formulation, may help with hyperactivity and impulsivity",
+            "Clonidine (Kapvay, Catapres): Can help with hyperactivity, impulsivity, and sleep issues"
+          ],
+          "sideEffects": "Common side effects: drowsiness, fatigue, low blood pressure, dizziness. These medications should not be stopped abruptly."
+        }
+      },
+      "considerations": {
+        "title": "Important Considerations",
+        "finding": {
+          "title": "Finding the Right Medication",
+          "points": [
+            "Medication effectiveness varies significantly between individuals",
+            "Finding the right medication and dosage often requires trial and adjustment",
+            "Factors to consider: symptom profile, lifestyle, comorbidities, side effect tolerance",
+            "Regular follow-ups with your healthcare provider are essential",
+            "Dosage may need adjustment over time"
+          ]
+        },
+        "monitoring": {
+          "title": "Monitoring & Safety",
+          "points": [
+            "Regular monitoring of blood pressure and heart rate",
+            "Tracking height and weight in children",
+            "Monitoring for side effects and effectiveness",
+            "Discussing any concerns or changes with your doctor",
+            "Not sharing medications with others",
+            "Storing medications securely"
+          ]
+        }
+      },
+      "myths": {
+        "title": "Medication Myths vs. Facts",
+        "mythsTitle": "Common Myths",
+        "myths": [
+          "\"ADHD medications are dangerous and addictive\"",
+          "\"Medications will change your personality\"",
+          "\"Once you start medication, you'll need it forever\"",
+          "\"Medications are a 'quick fix' and don't require other treatments\"",
+          "\"All ADHD medications work the same way\""
+        ],
+        "factsTitle": "Facts",
+        "facts": [
+          "When properly prescribed and monitored, ADHD medications are generally safe and effective",
+          "Medications help manage symptoms but don't fundamentally change who you are",
+          "Many people can stop or adjust medications as their needs change",
+          "Medication is most effective when combined with therapy, behavioral strategies, and lifestyle changes",
+          "Different medications work differently; finding the right one is a personalized process"
+        ]
+      },
+      "comprehensive": {
+        "title": "Medication as Part of Comprehensive Treatment",
+        "description": "Medication is often most effective when used as part of a comprehensive treatment plan that may include:",
+        "treatments": [
+          "Behavioral therapy to develop coping strategies",
+          "Cognitive behavioral therapy (CBT) for thought patterns",
+          "Executive function coaching for organization skills",
+          "Educational support and accommodations",
+          "Lifestyle modifications (exercise, sleep, nutrition)",
+          "Support groups and peer connections",
+          "Family therapy or parent training",
+          "Workplace accommodations for adults"
+        ]
+      },
+      "talkingToDoctor": {
+        "title": "Talking to Your Healthcare Provider",
+        "description": "If you're considering medication for ADHD, here are some questions to discuss with your healthcare provider:",
+        "questions": [
+          "What are the potential benefits and risks of medication for my specific situation?",
+          "What types of medications are available and how do they differ?",
+          "What side effects should I watch for?",
+          "How long will it take to see effects?",
+          "How will we monitor the medication's effectiveness?",
+          "Are there any interactions with other medications or conditions I should know about?",
+          "What should I do if I experience side effects?",
+          "How long might I need to take medication?"
+        ],
+        "remember": "Remember: Open communication with your healthcare provider is essential for safe and effective medication management.",
+        "learnMoreTitle": "Learn More",
+        "links": {
+          "nimh": "NIMH - ADHD Treatment",
+          "chadd": "CHADD - ADHD Treatment",
+          "cdc": "CDC - ADHD Treatment",
+          "mayo": "Mayo Clinic - ADHD Treatment",
+          "additude": "ADDitude - ADHD Medication Guide"
+        }
+      }
+    }
+  },
+  "assessment": {
+    "title": "ADHD Assessment",
+    "description": "Please answer all 18 questions based on how often you experience each situation.",
+    "question": "Question {number}:",
+    "options": {
+      "never": "Never",
+      "rarely": "Rarely",
+      "sometimes": "Sometimes",
+      "often": "Often",
+      "very_often": "Very Often"
+    },
+    "questions": [
+      "How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?",
+      "How often do you have difficulty getting things in order when you have to do a task that requires organization?",
+      "How often do you have problems remembering appointments or obligations?",
+      "When you have a task that requires a lot of thought, how often do you avoid or delay getting started?",
+      "How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?",
+      "How often do you feel overly active and compelled to do things, like you were driven by a motor?",
+      "How often do you make careless mistakes when you have to work on a boring or difficult project?",
+      "How often do you have difficulty keeping your attention when you are doing boring or repetitive work?",
+      "How often do you have difficulty concentrating on what people say to you, even when they are speaking to you directly?",
+      "How often do you misplace or have difficulty finding things at home or at work?",
+      "How often are you distracted by activity or noise around you?",
+      "How often do you leave your seat in meetings or other situations in which you are expected to remain seated?",
+      "How often do you feel restless or fidgety?",
+      "How often do you have difficulty unwinding and relaxing when you have time to yourself?",
+      "How often do you find yourself talking too much when you are in social situations?",
+      "When you're in a conversation, how often do you find yourself finishing the sentences of the people you are talking to, before they can finish them themselves?",
+      "How often do you have difficulty waiting your turn in situations when turn taking is required?",
+      "How often do you interrupt others when they are busy?"
+    ],
+    "results": {
+      "title": "ADHD Assessment Results",
+      "partA": {
+        "title": "Part A Results (Questions 1-6)",
+        "darkShaded": "Dark shaded responses: {count} out of 6",
+        "consistent": {
+          "title": "⚠️ Symptoms Highly Consistent with ADHD",
+          "description": "Four or more marks appear in the darkly shaded boxes within Part A. This indicates symptoms highly consistent with ADHD in adults and further investigation is warranted."
+        },
+        "notConsistent": {
+          "title": "✓ Fewer than 4 dark shaded responses in Part A",
+          "description": "The screening results do not indicate a high likelihood of ADHD symptoms based on Part A responses."
+        }
+      },
+      "partB": {
+        "title": "Part B Results (Questions 7-18)",
+        "darkShaded": "Dark shaded responses: {count} out of 12",
+        "description": "The frequency scores on Part B provide additional cues and can serve as further probes into the patient's symptoms. Pay particular attention to marks appearing in the dark shaded boxes. No total score or diagnostic likelihood is utilized for the twelve questions."
+      },
+      "detailed": {
+        "title": "Detailed Responses",
+        "partA": "(Part A)",
+        "partB": "(Part B)",
+        "darkShaded": "DARK SHADED",
+        "yourResponse": "Your response:"
+      }
+    }
+  },
+  "cpt": {
+    "title": "Conners Continuous Performance Test 3rd Edition (CPT-3)",
+    "instructions": {
+      "title": "Instructions",
+      "items": [
+        "You will see letters appear on the screen one at a time.",
+        "Press SPACEBAR or CLICK when you see any letter EXCEPT \"X\".",
+        "Do NOT respond when you see the letter \"X\".",
+        "The assessment will take approximately 14 minutes to complete (360 trials).",
+        "Respond as quickly and accurately as possible."
+      ],
+      "tip": "Tip: Keep your hands ready. You can use either the spacebar or mouse click to respond."
+    },
+    "start": "Start Assessment",
+    "timeRemaining": "Time Remaining",
+    "trials": "Trials",
+    "currentTrial": "{current} / {total}",
+    "pressForNonX": "Press SPACEBAR or CLICK when you see any letter except \"X\"",
+    "complete": "CPT-3 Assessment Complete - Detailed Results",
+    "basicStats": {
+      "title": "Basic Statistics",
+      "totalTrials": "Total Trials",
+      "targetLetters": "Target Letters",
+      "nonTargetLetters": "Non-Target Letters",
+      "correctResponses": "Correct Responses",
+      "accuracy": "({percent}% accuracy)"
+    },
+    "errors": {
+      "title": "Error Analysis",
+      "omission": "Omission Errors",
+      "omissionPercent": "({percent}% of targets)",
+      "commission": "Commission Errors",
+      "commissionPercent": "({percent}% of non-targets)",
+      "perseverations": "Perseverations",
+      "rtNote": "(RT < 100ms)"
+    },
+    "responseTime": {
+      "title": "Response Time Metrics",
+      "hitRT": "Hit Reaction Time",
+      "hitRTSD": "Hit RT Standard Deviation",
+      "requires2Hits": "*Requires at least 2 hits",
+      "variability": "Variability (CV%)",
+      "responseStyle": "Response Style"
+    },
+    "detectability": {
+      "title": "Detectability",
+      "description": "Ability to discriminate targets from non-targets: {value}"
+    },
+    "hitRTByISI": {
+      "title": "Hit Reaction Time by ISI",
+      "noResponses": "No correct responses recorded - cannot calculate reaction times by ISI",
+      "isi": "ISI: {value}ms"
+    },
+    "hitRTBlockChange": {
+      "title": "Hit Reaction Time Block Change",
+      "noResponses": "No correct responses recorded - cannot calculate reaction time changes",
+      "change": "Change in reaction time over blocks: {value}ms/block",
+      "block": "Block {number}"
+    },
+    "omissionsByBlock": {
+      "title": "Omission Errors by Block",
+      "block": "Block {number}"
+    },
+    "commissionsByBlock": {
+      "title": "Commission Errors by Block",
+      "block": "Block {number}"
+    },
+    "omissionsByISI": {
+      "title": "Omission Errors by ISI",
+      "isi": "ISI: {value}ms"
+    },
+    "commissionsByISI": {
+      "title": "Commission Errors by ISI",
+      "isi": "ISI: {value}ms"
+    },
+    "omissionsByBlock": {
+      "title": "Omission Errors by Block",
+      "block": "Block {number}"
+    },
+    "commissionsByBlock": {
+      "title": "Commission Errors by Block",
+      "block": "Block {number}"
+    },
+    "omissionsByISI": {
+      "title": "Omission Errors by ISI",
+      "isi": "ISI: {value}ms"
+    },
+    "commissionsByISI": {
+      "title": "Commission Errors by ISI",
+      "isi": "ISI: {value}ms"
+    },
+    "adhdAnalysis": {
+      "title": "ADHD-Related Performance Analysis",
+      "disclaimer": "Important Disclaimer: This analysis is for informational purposes only and is not a diagnostic tool. ADHD diagnosis requires comprehensive clinical evaluation by a qualified healthcare professional. Test performance can be influenced by many factors including fatigue, anxiety, motivation, and other conditions.",
+      "overallRisk": "Overall Risk Level:",
+      "riskScore": "(Risk Score: {score}/8)",
+      "indicators": "Identified Indicators:",
+      "concerns": "Performance Concerns:",
+      "omissionRate": "Omission Error Rate",
+      "commissionRate": "Commission Error Rate",
+      "variability": "Reaction Time Variability",
+      "elevatedInattention": "Elevated (Inattention)",
+      "elevatedImpulsivity": "Elevated (Impulsivity)",
+      "highInconsistent": "High (Inconsistent)",
+      "moderate": "Moderate",
+      "normal": "Normal",
+      "nextSteps": "Next Steps: If you have concerns about attention or impulse control, consider consulting with a healthcare professional who specializes in ADHD assessment. A comprehensive evaluation typically includes clinical interviews, behavioral observations, and may incorporate multiple assessment tools."
+    }
+  },
+  "tova": {
+    "title": "Test of Variables of Attention (TOVA)",
+    "instructions": {
+      "title": "Instructions",
+      "items": [
+        "You will see two types of squares appear on the screen: small and large.",
+        "First Half (10.8 minutes): Press SPACEBAR or CLICK when you see a SMALL square. Do NOT respond to large squares.",
+        "Second Half (10.8 minutes): Press SPACEBAR or CLICK when you see a LARGE square. Do NOT respond to small squares.",
+        "The test will automatically switch to the second half after 10.8 minutes.",
+        "Total duration: 21.6 minutes.",
+        "Respond as quickly and accurately as possible."
+      ],
+      "tip": "Tip: Pay attention to the indicator showing which half you're in. The target changes between halves!"
+    },
+    "start": "Start TOVA Test",
+    "timeRemaining": "Time Remaining",
+    "half": "Half",
+    "currentHalf": "{current} / 2",
+    "trials": "Trials",
+    "half1Instruction": "Half 1: Press for SMALL squares",
+    "half2Instruction": "Half 2: Press for LARGE squares",
+    "pressForSmall": "Press SPACEBAR or CLICK for SMALL squares",
+    "pressForLarge": "Press SPACEBAR or CLICK for LARGE squares",
+    "complete": "TOVA Assessment Complete - Detailed Results",
+    "basicStats": {
+      "title": "Basic Statistics",
+      "totalTrials": "Total Trials",
+      "half1Trials": "Half 1 Trials",
+      "half2Trials": "Half 2 Trials",
+      "anticipatoryResponses": "Anticipatory Responses"
+    },
+    "half1": {
+      "title": "Half 1: Infrequent Target (Small Square = Target)",
+      "targets": "Targets (Small)",
+      "nonTargets": "Non-Targets (Large)",
+      "omissionErrors": "Omission Errors",
+      "commissionErrors": "Commission Errors",
+      "hitRT": "Hit Reaction Time",
+      "hitRTSD": "Hit RT SD",
+      "variability": "Variability (CV%)",
+      "dPrime": "D-Prime"
+    },
+    "half2": {
+      "title": "Half 2: Frequent Target (Large Square = Target)",
+      "targets": "Targets (Large)",
+      "nonTargets": "Non-Targets (Small)",
+      "omissionErrors": "Omission Errors",
+      "commissionErrors": "Commission Errors",
+      "hitRT": "Hit Reaction Time",
+      "hitRTSD": "Hit RT SD",
+      "variability": "Variability (CV%)",
+      "dPrime": "D-Prime"
+    },
+    "overall": {
+      "title": "Overall Results",
+      "hitRT": "Overall Hit Reaction Time",
+      "variability": "Overall Variability (CV%)",
+      "dPrime": "Overall D-Prime",
+      "responseTimeToCorrect": "Response Time to Correct",
+      "totalOmissionErrors": "Total Omission Errors",
+      "totalCommissionErrors": "Total Commission Errors"
+    },
+    "adhdAnalysis": {
+      "title": "ADHD-Related Performance Analysis",
+      "disclaimer": "Important Disclaimer: This analysis is for informational purposes only and is not a diagnostic tool. ADHD diagnosis requires comprehensive clinical evaluation by a qualified healthcare professional. Test performance can be influenced by many factors including fatigue, anxiety, motivation, and other conditions.",
+      "overallRisk": "Overall Risk Level:",
+      "riskScore": "(Risk Score: {score}/9)",
+      "indicators": "Identified Indicators:",
+      "concerns": "Performance Concerns:",
+      "overallOmissionRate": "Overall Omission Rate",
+      "overallCommissionRate": "Overall Commission Rate",
+      "half1OmissionRate": "Half 1 Omission Rate",
+      "half2CommissionRate": "Half 2 Commission Rate",
+      "variability": "Reaction Time Variability",
+      "dPrime": "D-Prime (Discriminability)",
+      "elevatedInattention": "Elevated (Inattention)",
+      "elevatedImpulsivity": "Elevated (Impulsivity)",
+      "elevatedInfrequent": "Elevated (Infrequent targets)",
+      "elevatedFrequent": "Elevated (Frequent targets)",
+      "highInconsistent": "High (Inconsistent)",
+      "moderate": "Moderate",
+      "normal": "Normal",
+      "reduced": "Reduced",
+      "good": "Good",
+      "nextSteps": "Next Steps: If you have concerns about attention or impulse control, consider consulting with a healthcare professional who specializes in ADHD assessment. A comprehensive evaluation typically includes clinical interviews, behavioral observations, and may incorporate multiple assessment tools."
+    }
+  }
+}

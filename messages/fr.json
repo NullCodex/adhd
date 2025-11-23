@@ -1,0 +1,835 @@
+{
+  "common": {
+    "language": "Langue",
+    "english": "Anglais",
+    "french": "Français",
+    "backToHome": "Retour à l'accueil",
+    "learnMore": "En savoir plus",
+    "learnMoreAbout": "En savoir plus sur les évaluations du TDAH",
+    "notAnswered": "Non répondu",
+    "retakeAssessment": "Refaire l'évaluation",
+    "submitAssessment": "Soumettre l'évaluation",
+    "questionsAnswered": "{count} sur {total} questions répondues"
+  },
+  "nav": {
+    "whatIsAdhd": "Qu'est-ce que le TDAH?",
+    "statistics": "Statistiques",
+    "assessments": "Évaluations",
+    "aboutAssessments": "À propos des tests",
+    "otherAssessments": "Autres outils",
+    "understandingAdhd": "Comprendre le TDAH",
+    "medications": "Médicaments"
+  },
+  "home": {
+    "title": "Plateforme d'évaluation du TDAH",
+    "subtitle": "Outils d'évaluation complets pour aider à comprendre les modèles d'attention, de concentration et de contrôle des impulsions",
+    "whatIsAdhd": {
+      "title": "Qu'est-ce que le TDAH?",
+      "description": "Le trouble du déficit de l'attention avec hyperactivité (TDAH) est un trouble neurodéveloppemental caractérisé par des schémas persistants d'inattention, d'hyperactivité et d'impulsivité qui interfèrent avec le fonctionnement ou le développement. Le TDAH affecte à la fois les enfants et les adultes et peut avoir un impact sur divers aspects de la vie quotidienne, notamment le travail, l'école, les relations et l'estime de soi.",
+      "inattention": {
+        "title": "Inattention",
+        "description": "Difficulté à maintenir l'attention, à mener à bien les tâches, à organiser les activités et à être facilement distrait par des stimuli externes."
+      },
+      "hyperactivity": {
+        "title": "Hyperactivité",
+        "description": "Agitation excessive, agitation, difficulté à rester assis et sentiment de devoir être constamment en mouvement."
+      },
+      "impulsivity": {
+        "title": "Impulsivité",
+        "description": "Agir sans réfléchir, interrompre les autres, difficulté à attendre son tour et prendre des décisions hâtives sans considérer les conséquences."
+      },
+      "learnMoreTitle": "En savoir plus",
+      "links": {
+        "nimh": "NIMH - Informations sur le TDAH",
+        "cdc": "CDC - Ressources sur le TDAH",
+        "chadd": "CHADD - À propos du TDAH",
+        "mayo": "Mayo Clinic - Aperçu du TDAH"
+      }
+    },
+    "statistics": {
+      "title": "Statistiques et faits sur le TDAH",
+      "childrenWorldwide": "des enfants dans le monde sont diagnostiqués avec le TDAH",
+      "adultsEstimated": "des adultes sont estimés avoir le TDAH",
+      "symptomsIntoAdulthood": "des enfants atteints de TDAH continuent d'avoir des symptômes à l'âge adulte",
+      "maleToFemaleRatio": "ratio hommes/femmes diagnostiqués avec le TDAH dans l'enfance",
+      "commonComorbidities": {
+        "title": "Comorbidités courantes",
+        "description": "Le TDAH coexiste souvent avec d'autres conditions, notamment les troubles anxieux (25-40%), la dépression (20-30%), les troubles d'apprentissage (20-30%) et le trouble oppositionnel avec provocation."
+      },
+      "geneticFactors": {
+        "title": "Facteurs génétiques",
+        "description": "Le TDAH a une forte composante génétique avec une héritabilité estimée à 70-80%. Si un parent a le TDAH, son enfant a 25-35% de chances d'avoir également le TDAH."
+      },
+      "learnMoreTitle": "En savoir plus",
+      "links": {
+        "cdcData": "CDC - Données et statistiques sur le TDAH",
+        "nimhStats": "NIMH - Statistiques sur le TDAH",
+        "chaddFacts": "CHADD - Faits et statistiques sur le TDAH",
+        "who": "OMS - Fiche d'information sur le TDAH"
+      }
+    },
+    "assessments": {
+      "title": "Évaluations disponibles",
+      "questionnaire": {
+        "title": "Évaluation par questionnaire",
+        "description": "Complétez le questionnaire d'évaluation du TDAH de 18 questions pour dépister les symptômes.",
+        "features": {
+          "selfReport": "Outil de dépistage auto-déclaré",
+          "quick": "Évaluation rapide (~5-10 minutes)",
+          "assesses": "Évalue les symptômes d'inattention et d'hyperactivité-impulsivité"
+        },
+        "button": "Commencer le questionnaire"
+      },
+      "cpt": {
+        "title": "Évaluation CPT-3",
+        "description": "Test de performance continue de Conners - mesure objective de l'attention et du contrôle des impulsions.",
+        "features": {
+          "duration": "Durée de 14 minutes",
+          "trials": "360 essais",
+          "measures": "Mesure l'attention soutenue et l'inhibition de la réponse"
+        },
+        "button": "Commencer le test CPT"
+      },
+      "tova": {
+        "title": "Évaluation TOVA",
+        "description": "Test des variables d'attention - mesure l'attention et le contrôle des impulsions avec des formes géométriques.",
+        "features": {
+          "duration": "Durée de 21,6 minutes",
+          "halves": "Deux moitiés (cibles peu fréquentes vs fréquentes)",
+          "differentiates": "Différencie l'inattention et l'impulsivité"
+        },
+        "button": "Commencer le test TOVA"
+      },
+      "learnMoreTitle": "En savoir plus sur les évaluations du TDAH",
+      "links": {
+        "chaddDiagnosis": "CHADD - Diagnostic du TDAH chez les adultes",
+        "cdcDiagnosis": "CDC - Diagnostic du TDAH",
+        "additude": "ADDitude - Guide des tests du TDAH"
+      }
+    },
+    "aboutAssessments": {
+      "title": "À propos des évaluations",
+      "intro": "Cette plateforme fournit plusieurs outils d'évaluation fondés sur des preuves pour le dépistage et l'évaluation du TDAH. Chaque méthode a ses propres forces et limitations, et aucune ne devrait être utilisée comme outil de diagnostic autonome.",
+      "questionnaire": {
+        "title": "Évaluation par questionnaire",
+        "purpose": "Objectif: Cet outil de dépistage auto-déclaré de 18 questions est conçu pour identifier les symptômes cohérents avec le TDAH chez les adultes. Il évalue à la fois les symptômes d'inattention et d'hyperactivité-impulsivité dans différents domaines de la vie. Le questionnaire est divisé en deux parties: la partie A (6 premières questions) se concentre sur les symptômes les plus prédictifs pour le dépistage du TDAH, tandis que la partie B (12 questions restantes) fournit des informations cliniques supplémentaires.",
+        "limitationsTitle": "Limitations:",
+        "limitations": [
+          "Le biais d'auto-déclaration peut affecter la précision",
+          "Outil de dépistage uniquement, pas un instrument de diagnostic",
+          "Peut ne pas capturer tous les symptômes ou sous-types du TDAH",
+          "Les réponses subjectives peuvent varier selon la conscience de soi"
+        ]
+      },
+      "cpt": {
+        "title": "Évaluation CPT-3",
+        "purpose": "Objectif: Le test de performance continue de Conners 3e édition (CPT-3) est une évaluation informatisée qui mesure objectivement l'attention et le contrôle des impulsions. Pendant le test de 14 minutes, les participants répondent aux lettres cibles tout en inhibant les réponses aux non-cibles. Le test évalue l'attention soutenue, l'inhibition de la réponse, la vigilance et la cohérence de la performance dans le temps.",
+        "limitationsTitle": "Limitations:",
+        "limitations": [
+          "Peut ne pas détecter tous les sous-types de TDAH également bien",
+          "La performance peut être influencée par des facteurs autres que le TDAH (fatigue, motivation, anxiété, etc.)",
+          "Pas un outil de diagnostic autonome - nécessite une interprétation clinique",
+          "Nécessite des conditions et un environnement d'administration appropriés"
+        ]
+      },
+      "tova": {
+        "title": "Évaluation TOVA",
+        "purpose": "Objectif: Le test des variables d'attention (TOVA) est un test de performance continue informatisé qui mesure l'attention et le contrôle des impulsions en utilisant des formes géométriques simples. Le test se compose de deux moitiés: la première moitié présente des cibles peu fréquentes pour évaluer l'attention lorsque les cibles sont rares, tandis que la deuxième moitié présente des cibles fréquentes pour évaluer le contrôle des impulsions lorsque les non-cibles sont rares.",
+        "limitationsTitle": "Limitations:",
+        "limitations": [
+          "Peut produire des faux positifs ou des faux négatifs",
+          "La performance peut varier selon les facteurs environnementaux et les distractions",
+          "Pas suffisant seul pour le diagnostic - devrait être combiné avec d'autres évaluations",
+          "Peut être affecté par les effets de pratique s'il est répété"
+        ]
+      },
+      "disclaimer": {
+        "title": "⚠️ Avertissement important",
+        "text": "Ces évaluations sont des outils de dépistage et ne devraient pas remplacer une évaluation médicale professionnelle. Un diagnostic complet du TDAH nécessite une évaluation clinique par un professionnel de la santé qualifié, incluant les antécédents médicaux, l'examen physique et la considération de multiples sources d'information. Si vous avez des préoccupations concernant le TDAH, veuillez consulter un professionnel de la santé."
+      },
+      "learnMoreTitle": "En savoir plus",
+      "links": {
+        "chadd": "CHADD - Diagnostic du TDAH",
+        "apa": "APA - Critères DSM-5 pour le TDAH",
+        "cdc": "CDC - Lignes directrices pour le diagnostic du TDAH"
+      }
+    },
+    "otherAssessments": {
+      "title": "Autres outils d'évaluation du TDAH",
+      "intro": "Bien que cette plateforme se concentre sur des évaluations spécifiques, il existe de nombreux autres outils validés utilisés dans l'évaluation du TDAH. Voici quelques évaluations couramment utilisées qui ne sont pas actuellement disponibles sur cette plateforme:",
+      "ratingScales": {
+        "title": "Échelles d'évaluation et questionnaires",
+        "tools": {
+          "conners": {
+            "name": "Échelles d'évaluation de Conners (CRS):",
+            "description": "Échelles d'évaluation complètes pour les parents, les enseignants et l'auto-déclaration. Disponibles en plusieurs versions (Conners 3, Conners CBRS) pour différents groupes d'âge."
+          },
+          "vanderbilt": {
+            "name": "Échelles d'évaluation de Vanderbilt:",
+            "description": "Échelles d'évaluation pour parents et enseignants couramment utilisées en pédiatrie pour évaluer les symptômes du TDAH et les déficiences connexes."
+          },
+          "adhdrs": {
+            "name": "Échelle d'évaluation du TDAH (ADHD-RS):",
+            "description": "Échelle d'évaluation standardisée basée sur les critères du DSM, disponible en versions pour enfants et adultes."
+          },
+          "asrs": {
+            "name": "Échelle d'auto-évaluation du TDAH chez l'adulte (ASRS):",
+            "description": "Outil de dépistage développé par l'OMS pour le TDAH chez l'adulte, disponible en versions complète et abrégée."
+          },
+          "badds": {
+            "name": "Échelles de Brown pour le trouble du déficit de l'attention (BADDS):",
+            "description": "Évaluation complète axée sur les déficits de fonction exécutive associés au TDAH."
+          },
+          "baars": {
+            "name": "Échelle d'évaluation du TDAH chez l'adulte de Barkley (BAARS):",
+            "description": "Échelles d'évaluation auto-déclarées et d'observateur spécifiquement conçues pour l'évaluation du TDAH chez l'adulte."
+          },
+          "wurs": {
+            "name": "Échelle d'évaluation de Wender Utah (WURS):",
+            "description": "Échelle d'auto-évaluation rétrospective évaluant les symptômes du TDAH de l'enfance chez les adultes."
+          },
+          "snap": {
+            "name": "Échelle d'évaluation SNAP:",
+            "description": "Échelle d'évaluation de Swanson, Nolan et Pelham pour évaluer les symptômes du TDAH et les comportements connexes."
+          }
+        }
+      },
+      "neuropsychological": {
+        "title": "Tests neuropsychologiques et de performance",
+        "tools": {
+          "iva2": {
+            "name": "IVA-2 (Test de performance continue visuel et auditif intégré):",
+            "description": "Test de performance continue qui mesure à la fois l'attention visuelle et auditive, fournissant une évaluation complète des déficits d'attention."
+          },
+          "qbtest": {
+            "name": "QbTest:",
+            "description": "Test informatisé combinant la mesure de l'attention et de l'activité en utilisant le suivi de mouvement infrarouge pour évaluer l'hyperactivité."
+          },
+          "tea": {
+            "name": "Test d'attention quotidienne (TEA):",
+            "description": "Batterie de tests évaluant différents aspects de l'attention, y compris l'attention sélective, soutenue et divisée."
+          },
+          "dkefs": {
+            "name": "Système de fonction exécutive Delis-Kaplan (D-KEFS):",
+            "description": "Évaluation complète des fonctions exécutives, y compris la mémoire de travail, la flexibilité cognitive et l'inhibition."
+          },
+          "brief": {
+            "name": "Inventaire d'évaluation comportementale de la fonction exécutive (BRIEF):",
+            "description": "Échelle d'évaluation évaluant les comportements de fonction exécutive dans la vie quotidienne, disponible pour les enfants et les adultes."
+          },
+          "kcpt": {
+            "name": "Test de performance continue pour enfants de Conners (K-CPT):",
+            "description": "Version adaptée à l'âge du CPT conçue spécifiquement pour les enfants de 4 à 5 ans."
+          },
+          "stroop": {
+            "name": "Test de Stroop couleur-mot:",
+            "description": "Test neuropsychologique classique mesurant l'inhibition cognitive et l'attention sélective."
+          },
+          "trail": {
+            "name": "Test de traçage:",
+            "description": "Évaluation de l'attention visuelle, du changement de tâche et de la vitesse de traitement, couramment utilisé dans les évaluations du TDAH."
+          }
+        }
+      },
+      "note": "Note: Cette liste ne représente qu'un échantillon des outils d'évaluation du TDAH disponibles. Une évaluation complète du TDAH implique généralement plusieurs méthodes d'évaluation, des entretiens cliniques, des observations comportementales et la considération de l'historique développemental. Le choix des outils d'évaluation dépend de l'âge de l'individu, des préoccupations spécifiques et du contexte clinique. Consultez toujours des professionnels de la santé qualifiés pour une évaluation et un diagnostic appropriés.",
+      "learnMoreTitle": "En savoir plus",
+      "links": {
+        "chadd": "CHADD - Outils d'évaluation",
+        "additude": "ADDitude - Ressources de test du TDAH",
+        "apa": "APA - Ressources sur le TDAH"
+      }
+    },
+    "understandingAdhd": {
+      "title": "Comprendre le TDAH",
+      "subtypes": {
+        "title": "Sous-types du TDAH",
+        "inattentive": {
+          "title": "Principalement inattentif (TDAH-I)",
+          "description": "Caractérisé principalement par des difficultés d'attention et de concentration, avec moins de symptômes hyperactifs ou impulsifs.",
+          "symptomsTitle": "Les symptômes courants incluent:",
+          "symptoms": [
+            "Difficulté à maintenir l'attention",
+            "Facilement distrait",
+            "Oubli",
+            "Mauvaise organisation",
+            "Difficulté à suivre les instructions",
+            "Perdre fréquemment des objets"
+          ]
+        },
+        "hyperactive": {
+          "title": "Principalement hyperactif-impulsif (TDAH-H)",
+          "description": "Caractérisé par l'hyperactivité et l'impulsivité, avec moins de symptômes d'inattention.",
+          "symptomsTitle": "Les symptômes courants incluent:",
+          "symptoms": [
+            "Agitation et agitation",
+            "Difficulté à rester assis",
+            "Parler excessivement",
+            "Interrompre les autres",
+            "Difficulté à attendre son tour",
+            "Agir sans réfléchir"
+          ]
+        },
+        "combined": {
+          "title": "Type combiné (TDAH-C)",
+          "description": "Le sous-type le plus courant, présentant des symptômes significatifs à la fois d'inattention et d'hyperactivité-impulsivité.",
+          "featuresTitle": "Caractéristiques:",
+          "features": [
+            "Répond aux critères à la fois pour l'inattention et l'hyperactivité",
+            "Le plus souvent diagnostiqué chez les enfants",
+            "Peut se présenter différemment chez les adultes",
+            "Nécessite souvent un traitement complet"
+          ]
+        }
+      },
+      "lifeStages": {
+        "title": "Symptômes à travers les étapes de la vie",
+        "childhood": {
+          "title": "Enfance et adolescence",
+          "symptoms": [
+            "Difficultés académiques, mauvaises notes malgré l'intelligence",
+            "Problèmes comportementaux à l'école",
+            "Défis sociaux et difficultés relationnelles avec les pairs",
+            "Difficulté à suivre les règles et les routines",
+            "Comportements à risque"
+          ]
+        },
+        "adulthood": {
+          "title": "Âge adulte",
+          "symptoms": [
+            "Performance au travail et défis de carrière",
+            "Difficultés de gestion du temps et d'organisation",
+            "Problèmes relationnels et de communication",
+            "Problèmes de gestion financière",
+            "Défis de régulation émotionnelle"
+          ]
+        }
+      },
+      "causes": {
+        "title": "Causes et facteurs de risque",
+        "genetic": {
+          "title": "Facteurs génétiques",
+          "description": "Le TDAH a une forte composante génétique avec une héritabilité estimée à 70-80%. Si un parent a le TDAH, son enfant a 25-35% de chances d'avoir également le TDAH.",
+          "points": [
+            "Les antécédents familiaux sont un facteur de risque significatif",
+            "Plusieurs gènes sont impliqués, pas un seul gène",
+            "Les variations génétiques affectent les systèmes de neurotransmetteurs"
+          ]
+        },
+        "environmental": {
+          "title": "Facteurs environnementaux",
+          "description": "Bien que la génétique joue le rôle principal, certains facteurs environnementaux peuvent contribuer au risque de TDAH.",
+          "points": [
+            "Naissance prématurée ou faible poids à la naissance",
+            "Exposition prénatale à l'alcool, au tabac ou aux drogues",
+            "Exposition au plomb dans la petite enfance",
+            "Lésions cérébrales"
+          ]
+        }
+      },
+      "treatment": {
+        "title": "Options de traitement",
+        "medication": {
+          "title": "Médicaments",
+          "description": "Les médicaments peuvent être efficaces pour gérer les symptômes du TDAH, mais doivent toujours être prescrits et surveillés par un professionnel de la santé.",
+          "typesTitle": "Les types incluent:",
+          "types": [
+            "Stimulants: Les plus couramment prescrits (méthylphénidate, amphétamines)",
+            "Non-stimulants: Option alternative (atomoxétine, guanfacine)",
+            "Antidépresseurs: Parfois utilisés pour les conditions comorbides"
+          ],
+          "note": "L'efficacité des médicaments varie selon l'individu et devrait faire partie d'un plan de traitement complet."
+        },
+        "therapy": {
+          "title": "Thérapie et interventions comportementales",
+          "description": "Diverses approches thérapeutiques peuvent aider les individus à développer des stratégies d'adaptation et à améliorer leur fonctionnement.",
+          "types": [
+            "Thérapie cognitivo-comportementale (TCC): Aborde les schémas de pensée et les comportements",
+            "Thérapie comportementale: Se concentre sur la modification des comportements et le développement des compétences",
+            "Formation des parents: Aide les parents à soutenir les enfants atteints de TDAH",
+            "Formation aux compétences sociales: Améliore les relations interpersonnelles",
+            "Coaching de fonction exécutive: Développe les compétences d'organisation et de planification"
+          ]
+        }
+      },
+      "coping": {
+        "title": "Stratégies d'adaptation et accommodements",
+        "students": {
+          "title": "Pour les étudiants",
+          "strategies": [
+            "Temps prolongé pour les tests",
+            "Placement préférentiel",
+            "Assistance à la prise de notes",
+            "Pauses pendant les tâches longues",
+            "Soutien organisationnel",
+            "Charge de devoirs réduite"
+          ]
+        },
+        "adults": {
+          "title": "Pour les adultes au travail",
+          "strategies": [
+            "Horaires de travail flexibles",
+            "Espace de travail calme",
+            "Instructions écrites",
+            "Soutien à la priorisation des tâches",
+            "Vérifications régulières",
+            "Casques antibruit"
+          ]
+        },
+        "daily": {
+          "title": "Stratégies de vie quotidienne",
+          "strategies": [
+            "Utiliser des calendriers et des rappels",
+            "Diviser les tâches en étapes plus petites",
+            "Établir des routines",
+            "Minimiser les distractions",
+            "Exercice régulier",
+            "Sommeil adéquat"
+          ]
+        }
+      },
+      "myths": {
+        "title": "Mythes courants vs. Faits",
+        "mythsTitle": "Mythes",
+        "myths": [
+          "\"Le TDAH est causé par une mauvaise parentalité ou trop de sucre\"",
+          "\"Le TDAH n'affecte que les enfants et ils en grandissent\"",
+          "\"Les personnes atteintes de TDAH ont juste besoin d'essayer plus fort\"",
+          "\"Les médicaments contre le TDAH sont dangereux et créent une dépendance\"",
+          "\"Le TDAH n'est pas une condition réelle\""
+        ],
+        "factsTitle": "Faits",
+        "facts": [
+          "Le TDAH est une condition neurobiologique avec de fortes composantes génétiques",
+          "Le TDAH persiste à l'âge adulte pour 60% de ceux diagnostiqués dans l'enfance",
+          "Le TDAH implique de vraies différences cérébrales qui affectent la fonction exécutive",
+          "Lorsqu'ils sont correctement prescrits et surveillés, les médicaments contre le TDAH sont sûrs et efficaces",
+          "Le TDAH est reconnu par les principales organisations médicales mondiales"
+        ]
+      },
+      "gettingHelp": {
+        "title": "Obtenir de l'aide et du soutien",
+        "professional": {
+          "title": "Ressources professionnelles",
+          "resources": [
+            "Consulter un psychiatre, psychologue ou neurologue spécialisé dans le TDAH",
+            "Chercher une évaluation complète incluant un entretien clinique et des outils d'évaluation",
+            "Travailler avec des thérapeutes formés aux interventions spécifiques au TDAH",
+            "Envisager des coachs TDAH pour le développement de compétences pratiques"
+          ]
+        },
+        "support": {
+          "title": "Réseaux de soutien",
+          "resources": [
+            "Rejoindre des groupes de soutien TDAH (en personne ou en ligne)",
+            "Se connecter avec des organisations de défense du TDAH",
+            "Éduquer la famille et les amis sur le TDAH",
+            "Accéder aux ressources éducatives et à la recherche"
+          ]
+        },
+        "remember": "Rappelez-vous: Un diagnostic précoce et un traitement approprié peuvent considérablement améliorer la qualité de vie. Si vous soupçonnez que vous ou un proche avez le TDAH, n'hésitez pas à chercher une évaluation professionnelle. Avec un soutien approprié, les personnes atteintes de TDAH peuvent prospérer et réussir dans tous les domaines de la vie.",
+        "learnMoreTitle": "En savoir plus",
+        "links": {
+          "chadd": "CHADD - Comprendre le TDAH",
+          "nimh": "NIMH - Informations sur le TDAH",
+          "additude": "Magazine ADDitude",
+          "mayo": "Mayo Clinic - TDAH"
+        }
+      }
+    },
+    "medications": {
+      "title": "Médicaments contre le TDAH",
+      "intro": "Les médicaments peuvent être un composant efficace du traitement du TDAH lorsqu'ils sont prescrits et surveillés par un professionnel de la santé qualifié. Cette section fournit des informations sur les médicaments courants contre le TDAH, leurs mécanismes et considérations importantes.",
+      "disclaimer": {
+        "title": "⚠️ Avertissement médical important",
+        "text": "Les informations fournies ici sont à des fins éducatives uniquement et ne devraient pas remplacer les conseils médicaux professionnels, le diagnostic ou le traitement. Consultez toujours un professionnel de la santé qualifié avant de commencer, d'arrêter ou de modifier tout médicament. Seuls les professionnels de la santé licenciés peuvent prescrire des médicaments contre le TDAH après une évaluation appropriée."
+      },
+      "stimulants": {
+        "title": "Médicaments stimulants",
+        "description": "Les stimulants sont les médicaments les plus couramment prescrits pour le TDAH et sont considérés comme un traitement de première ligne. Ils fonctionnent en augmentant les niveaux de certains neurotransmetteurs (dopamine et noradrénaline) dans le cerveau, ce qui aide à améliorer l'attention, la concentration et le contrôle des impulsions.",
+        "methylphenidate": {
+          "title": "Médicaments à base de méthylphénidate",
+          "description": "Ces médicaments sont disponibles sous diverses formulations avec différentes durées d'action.",
+          "medications": [
+            "Ritaline (libération immédiate): À action courte, dure généralement 3-4 heures",
+            "Ritaline LA (action prolongée): Libération prolongée, dure 8-12 heures",
+            "Concerta (libération prolongée): Posologie une fois par jour, dure 10-12 heures",
+            "Daytrana (patch): Patch transdermique, fournit une administration constante",
+            "Focalin / Focalin XR: Dexméthylphénidate, similaire au méthylphénidate",
+            "Quillivant XR / Quillichew ER: Formulations liquides et à croquer"
+          ]
+        },
+        "amphetamine": {
+          "title": "Médicaments à base d'amphétamine",
+          "description": "Ces médicaments augmentent également la dopamine et la noradrénaline, avec des mécanismes légèrement différents.",
+          "medications": [
+            "Adderall / Adderall XR: Sels d'amphétamine mixtes, libération immédiate et prolongée",
+            "Vyvanse (lisdexamfétamine): Prodrogue qui se convertit en dextroamphétamine, à action prolongée",
+            "Dexedrine / Dexedrine Spansule: Dextroamphétamine, libération immédiate et prolongée",
+            "Evekeo: Sulfate d'amphétamine racémique",
+            "Mydayis: Système de libération à triple perle, dure jusqu'à 16 heures"
+          ]
+        },
+        "note": "Note: Les médicaments stimulants sont des substances contrôlées et nécessitent une surveillance attentive. Les effets secondaires courants peuvent inclure une diminution de l'appétit, des difficultés de sommeil, des maux de tête et une augmentation du rythme cardiaque ou de la tension artérielle. Ces médicaments ne devraient pas être utilisés par des personnes atteintes de certaines conditions cardiaques, de glaucome ou ayant des antécédents d'abus de substances."
+      },
+      "nonStimulants": {
+        "title": "Médicaments non stimulants",
+        "description": "Les médicaments non stimulants peuvent être préférés lorsque les stimulants ne sont pas appropriés, causent des effets secondaires intolérables ou lorsqu'il y a des préoccupations concernant le potentiel d'abus. Ils fonctionnent par des mécanismes différents des stimulants.",
+        "atomoxetine": {
+          "title": "Atomoxétine (Strattera)",
+          "description": "Un inhibiteur sélectif de la recapture de la noradrénaline (ISRN) qui n'est pas une substance contrôlée.",
+          "points": [
+            "Prend 2-4 semaines pour voir les effets complets",
+            "Posologie une fois par jour",
+            "Peut aider avec les symptômes d'anxiété",
+            "Effets secondaires courants: nausées, fatigue, diminution de l'appétit",
+            "Peut causer des problèmes hépatiques dans de rares cas"
+          ]
+        },
+        "alpha2": {
+          "title": "Agonistes alpha-2",
+          "description": "Ces médicaments fonctionnent en affectant les récepteurs de noradrénaline dans le cortex préfrontal.",
+          "medications": [
+            "Guanfacine (Intuniv, Tenex): Formulation à libération prolongée, peut aider avec l'hyperactivité et l'impulsivité",
+            "Clonidine (Kapvay, Catapres): Peut aider avec l'hyperactivité, l'impulsivité et les problèmes de sommeil"
+          ],
+          "sideEffects": "Effets secondaires courants: somnolence, fatigue, hypotension, vertiges. Ces médicaments ne devraient pas être arrêtés brusquement."
+        }
+      },
+      "considerations": {
+        "title": "Considérations importantes",
+        "finding": {
+          "title": "Trouver le bon médicament",
+          "points": [
+            "L'efficacité des médicaments varie considérablement entre les individus",
+            "Trouver le bon médicament et le bon dosage nécessite souvent des essais et des ajustements",
+            "Facteurs à considérer: profil des symptômes, mode de vie, comorbidités, tolérance aux effets secondaires",
+            "Les suivis réguliers avec votre professionnel de la santé sont essentiels",
+            "Le dosage peut nécessiter des ajustements au fil du temps"
+          ]
+        },
+        "monitoring": {
+          "title": "Surveillance et sécurité",
+          "points": [
+            "Surveillance régulière de la tension artérielle et du rythme cardiaque",
+            "Suivi de la taille et du poids chez les enfants",
+            "Surveillance des effets secondaires et de l'efficacité",
+            "Discuter de toute préoccupation ou changement avec votre médecin",
+            "Ne pas partager les médicaments avec d'autres",
+            "Stocker les médicaments en sécurité"
+          ]
+        }
+      },
+      "myths": {
+        "title": "Mythes sur les médicaments vs. Faits",
+        "mythsTitle": "Mythes courants",
+        "myths": [
+          "\"Les médicaments contre le TDAH sont dangereux et créent une dépendance\"",
+          "\"Les médicaments changeront votre personnalité\"",
+          "\"Une fois que vous commencez les médicaments, vous en aurez besoin pour toujours\"",
+          "\"Les médicaments sont une 'solution rapide' et ne nécessitent pas d'autres traitements\"",
+          "\"Tous les médicaments contre le TDAH fonctionnent de la même manière\""
+        ],
+        "factsTitle": "Faits",
+        "facts": [
+          "Lorsqu'ils sont correctement prescrits et surveillés, les médicaments contre le TDAH sont généralement sûrs et efficaces",
+          "Les médicaments aident à gérer les symptômes mais ne changent pas fondamentalement qui vous êtes",
+          "Beaucoup de gens peuvent arrêter ou ajuster les médicaments selon leurs besoins",
+          "Les médicaments sont plus efficaces lorsqu'ils sont combinés avec la thérapie, les stratégies comportementales et les changements de mode de vie",
+          "Différents médicaments fonctionnent différemment; trouver le bon est un processus personnalisé"
+        ]
+      },
+      "comprehensive": {
+        "title": "Médicaments dans le cadre d'un traitement complet",
+        "description": "Les médicaments sont souvent plus efficaces lorsqu'ils sont utilisés dans le cadre d'un plan de traitement complet qui peut inclure:",
+        "treatments": [
+          "Thérapie comportementale pour développer des stratégies d'adaptation",
+          "Thérapie cognitivo-comportementale (TCC) pour les schémas de pensée",
+          "Coaching de fonction exécutive pour les compétences d'organisation",
+          "Soutien éducatif et accommodements",
+          "Modifications du mode de vie (exercice, sommeil, nutrition)",
+          "Groupes de soutien et connexions avec les pairs",
+          "Thérapie familiale ou formation des parents",
+          "Accommodements en milieu de travail pour les adultes"
+        ]
+      },
+      "talkingToDoctor": {
+        "title": "Parler à votre professionnel de la santé",
+        "description": "Si vous envisagez des médicaments pour le TDAH, voici quelques questions à discuter avec votre professionnel de la santé:",
+        "questions": [
+          "Quels sont les avantages et risques potentiels des médicaments pour ma situation spécifique?",
+          "Quels types de médicaments sont disponibles et comment diffèrent-ils?",
+          "Quels effets secondaires dois-je surveiller?",
+          "Combien de temps faudra-t-il pour voir les effets?",
+          "Comment surveillerons-nous l'efficacité du médicament?",
+          "Y a-t-il des interactions avec d'autres médicaments ou conditions que je devrais connaître?",
+          "Que devrais-je faire si je ressens des effets secondaires?",
+          "Combien de temps pourrais-je avoir besoin de prendre des médicaments?"
+        ],
+        "remember": "Rappelez-vous: Une communication ouverte avec votre professionnel de la santé est essentielle pour une gestion sûre et efficace des médicaments.",
+        "learnMoreTitle": "En savoir plus",
+        "links": {
+          "nimh": "NIMH - Traitement du TDAH",
+          "chadd": "CHADD - Traitement du TDAH",
+          "cdc": "CDC - Traitement du TDAH",
+          "mayo": "Mayo Clinic - Traitement du TDAH",
+          "additude": "ADDitude - Guide des médicaments contre le TDAH"
+        }
+      }
+    }
+  },
+  "assessment": {
+    "title": "Évaluation du TDAH",
+    "description": "Veuillez répondre aux 18 questions en fonction de la fréquence à laquelle vous vivez chaque situation.",
+    "question": "Question {number}:",
+    "options": {
+      "never": "Jamais",
+      "rarely": "Rarement",
+      "sometimes": "Parfois",
+      "often": "Souvent",
+      "very_often": "Très souvent"
+    },
+    "questions": [
+      "À quelle fréquence avez-vous des difficultés à finaliser les détails d'un projet, une fois que les parties difficiles ont été faites?",
+      "À quelle fréquence avez-vous des difficultés à mettre les choses en ordre lorsque vous devez effectuer une tâche qui nécessite de l'organisation?",
+      "À quelle fréquence avez-vous des problèmes à vous souvenir des rendez-vous ou des obligations?",
+      "Lorsque vous avez une tâche qui nécessite beaucoup de réflexion, à quelle fréquence évitez-vous ou retardez-vous de commencer?",
+      "À quelle fréquence vous agitez-vous ou vous tortillez-vous avec vos mains ou vos pieds lorsque vous devez rester assis pendant longtemps?",
+      "À quelle fréquence vous sentez-vous excessivement actif et obligé de faire des choses, comme si vous étiez poussé par un moteur?",
+      "À quelle fréquence faites-vous des erreurs d'inattention lorsque vous devez travailler sur un projet ennuyeux ou difficile?",
+      "À quelle fréquence avez-vous des difficultés à maintenir votre attention lorsque vous faites un travail ennuyeux ou répétitif?",
+      "À quelle fréquence avez-vous des difficultés à vous concentrer sur ce que les gens vous disent, même lorsqu'ils vous parlent directement?",
+      "À quelle fréquence égarez-vous ou avez-vous des difficultés à trouver des choses à la maison ou au travail?",
+      "À quelle fréquence êtes-vous distrait par l'activité ou le bruit autour de vous?",
+      "À quelle fréquence quittez-vous votre siège lors de réunions ou d'autres situations où vous êtes censé rester assis?",
+      "À quelle fréquence vous sentez-vous agité ou agité?",
+      "À quelle fréquence avez-vous des difficultés à vous détendre et à vous relaxer lorsque vous avez du temps pour vous?",
+      "À quelle fréquence vous trouvez-vous à parler trop lorsque vous êtes dans des situations sociales?",
+      "Lorsque vous êtes dans une conversation, à quelle fréquence vous trouvez-vous à terminer les phrases des personnes avec qui vous parlez, avant qu'elles ne puissent les terminer elles-mêmes?",
+      "À quelle fréquence avez-vous des difficultés à attendre votre tour dans des situations où il faut attendre son tour?",
+      "À quelle fréquence interrompez-vous les autres lorsqu'ils sont occupés?"
+    ],
+    "results": {
+      "title": "Résultats de l'évaluation du TDAH",
+      "partA": {
+        "title": "Résultats de la partie A (Questions 1-6)",
+        "darkShaded": "Réponses ombrées foncées: {count} sur 6",
+        "consistent": {
+          "title": "⚠️ Symptômes très cohérents avec le TDAH",
+          "description": "Quatre marques ou plus apparaissent dans les cases ombrées foncées de la partie A. Cela indique des symptômes très cohérents avec le TDAH chez les adultes et une enquête plus approfondie est justifiée."
+        },
+        "notConsistent": {
+          "title": "✓ Moins de 4 réponses ombrées foncées dans la partie A",
+          "description": "Les résultats du dépistage n'indiquent pas une forte probabilité de symptômes du TDAH basés sur les réponses de la partie A."
+        }
+      },
+      "partB": {
+        "title": "Résultats de la partie B (Questions 7-18)",
+        "darkShaded": "Réponses ombrées foncées: {count} sur 12",
+        "description": "Les scores de fréquence de la partie B fournissent des indices supplémentaires et peuvent servir de sondes supplémentaires dans les symptômes du patient. Portez une attention particulière aux marques apparaissant dans les cases ombrées foncées. Aucun score total ou probabilité de diagnostic n'est utilisé pour les douze questions."
+      },
+      "detailed": {
+        "title": "Réponses détaillées",
+        "partA": "(Partie A)",
+        "partB": "(Partie B)",
+        "darkShaded": "OMBRÉ FONCÉ",
+        "yourResponse": "Votre réponse:"
+      }
+    }
+  },
+  "cpt": {
+    "title": "Test de performance continue de Conners 3e édition (CPT-3)",
+    "instructions": {
+      "title": "Instructions",
+      "items": [
+        "Vous verrez des lettres apparaître à l'écran une par une.",
+        "Appuyez sur ESPACE ou CLIQUEZ lorsque vous voyez n'importe quelle lettre SAUF \"X\".",
+        "Ne répondez PAS lorsque vous voyez la lettre \"X\".",
+        "L'évaluation prendra environ 14 minutes à compléter (360 essais).",
+        "Répondez aussi rapidement et précisément que possible."
+      ],
+      "tip": "Astuce: Gardez vos mains prêtes. Vous pouvez utiliser la barre d'espace ou le clic de la souris pour répondre."
+    },
+    "start": "Commencer l'évaluation",
+    "timeRemaining": "Temps restant",
+    "trials": "Essais",
+    "currentTrial": "{current} / {total}",
+    "pressForNonX": "Appuyez sur ESPACE ou CLIQUEZ lorsque vous voyez n'importe quelle lettre sauf \"X\"",
+    "complete": "Évaluation CPT-3 terminée - Résultats détaillés",
+    "basicStats": {
+      "title": "Statistiques de base",
+      "totalTrials": "Total des essais",
+      "targetLetters": "Lettres cibles",
+      "nonTargetLetters": "Lettres non cibles",
+      "correctResponses": "Réponses correctes",
+      "accuracy": "({percent}% de précision)"
+    },
+    "errors": {
+      "title": "Analyse des erreurs",
+      "omission": "Erreurs d'omission",
+      "omissionPercent": "({percent}% des cibles)",
+      "commission": "Erreurs de commission",
+      "commissionPercent": "({percent}% des non-cibles)",
+      "perseverations": "Persévérations",
+      "rtNote": "(RT < 100ms)"
+    },
+    "responseTime": {
+      "title": "Métriques du temps de réponse",
+      "hitRT": "Temps de réaction aux coups",
+      "hitRTSD": "Écart-type du temps de réaction aux coups",
+      "requires2Hits": "*Nécessite au moins 2 coups",
+      "variability": "Variabilité (CV%)",
+      "responseStyle": "Style de réponse"
+    },
+    "detectability": {
+      "title": "Détectabilité",
+      "description": "Capacité à discriminer les cibles des non-cibles: {value}"
+    },
+    "hitRTByISI": {
+      "title": "Temps de réaction aux coups par ISI",
+      "noResponses": "Aucune réponse correcte enregistrée - impossible de calculer les temps de réaction par ISI",
+      "isi": "ISI: {value}ms"
+    },
+    "hitRTBlockChange": {
+      "title": "Changement du temps de réaction aux coups par bloc",
+      "noResponses": "Aucune réponse correcte enregistrée - impossible de calculer les changements de temps de réaction",
+      "change": "Changement du temps de réaction sur les blocs: {value}ms/bloc",
+      "block": "Bloc {number}"
+    },
+    "omissionsByBlock": {
+      "title": "Erreurs d'omission par bloc",
+      "block": "Bloc {number}"
+    },
+    "commissionsByBlock": {
+      "title": "Erreurs de commission par bloc",
+      "block": "Bloc {number}"
+    },
+    "omissionsByISI": {
+      "title": "Erreurs d'omission par ISI",
+      "isi": "ISI: {value}ms"
+    },
+    "commissionsByISI": {
+      "title": "Erreurs de commission par ISI",
+      "isi": "ISI: {value}ms"
+    },
+    "omissionsByBlock": {
+      "title": "Erreurs d'omission par bloc",
+      "block": "Bloc {number}"
+    },
+    "commissionsByBlock": {
+      "title": "Erreurs de commission par bloc",
+      "block": "Bloc {number}"
+    },
+    "omissionsByISI": {
+      "title": "Erreurs d'omission par ISI",
+      "isi": "ISI: {value}ms"
+    },
+    "commissionsByISI": {
+      "title": "Erreurs de commission par ISI",
+      "isi": "ISI: {value}ms"
+    },
+    "adhdAnalysis": {
+      "title": "Analyse de performance liée au TDAH",
+      "disclaimer": "Avertissement important: Cette analyse est à des fins informatives uniquement et n'est pas un outil de diagnostic. Le diagnostic du TDAH nécessite une évaluation clinique complète par un professionnel de la santé qualifié. La performance au test peut être influencée par de nombreux facteurs, notamment la fatigue, l'anxiété, la motivation et d'autres conditions.",
+      "overallRisk": "Niveau de risque global:",
+      "riskScore": "(Score de risque: {score}/8)",
+      "indicators": "Indicateurs identifiés:",
+      "concerns": "Préoccupations de performance:",
+      "omissionRate": "Taux d'erreur d'omission",
+      "commissionRate": "Taux d'erreur de commission",
+      "variability": "Variabilité du temps de réaction",
+      "elevatedInattention": "Élevé (Inattention)",
+      "elevatedImpulsivity": "Élevé (Impulsivité)",
+      "highInconsistent": "Élevé (Incohérent)",
+      "moderate": "Modéré",
+      "normal": "Normal",
+      "nextSteps": "Prochaines étapes: Si vous avez des préoccupations concernant l'attention ou le contrôle des impulsions, envisagez de consulter un professionnel de la santé spécialisé dans l'évaluation du TDAH. Une évaluation complète comprend généralement des entretiens cliniques, des observations comportementales et peut incorporer plusieurs outils d'évaluation."
+    }
+  },
+  "tova": {
+    "title": "Test des variables d'attention (TOVA)",
+    "instructions": {
+      "title": "Instructions",
+      "items": [
+        "Vous verrez deux types de carrés apparaître à l'écran: petits et grands.",
+        "Première moitié (10,8 minutes): Appuyez sur ESPACE ou CLIQUEZ lorsque vous voyez un carré PETIT. Ne répondez PAS aux grands carrés.",
+        "Deuxième moitié (10,8 minutes): Appuyez sur ESPACE ou CLIQUEZ lorsque vous voyez un carré GRAND. Ne répondez PAS aux petits carrés.",
+        "Le test passera automatiquement à la deuxième moitié après 10,8 minutes.",
+        "Durée totale: 21,6 minutes.",
+        "Répondez aussi rapidement et précisément que possible."
+      ],
+      "tip": "Astuce: Faites attention à l'indicateur montrant dans quelle moitié vous êtes. La cible change entre les moitiés!"
+    },
+    "start": "Commencer le test TOVA",
+    "timeRemaining": "Temps restant",
+    "half": "Moitié",
+    "currentHalf": "{current} / 2",
+    "trials": "Essais",
+    "half1Instruction": "Moitié 1: Appuyez pour les carrés PETITS",
+    "half2Instruction": "Moitié 2: Appuyez pour les carrés GRANDS",
+    "pressForSmall": "Appuyez sur ESPACE ou CLIQUEZ pour les carrés PETITS",
+    "pressForLarge": "Appuyez sur ESPACE ou CLIQUEZ pour les carrés GRANDS",
+    "complete": "Évaluation TOVA terminée - Résultats détaillés",
+    "basicStats": {
+      "title": "Statistiques de base",
+      "totalTrials": "Total des essais",
+      "half1Trials": "Essais de la moitié 1",
+      "half2Trials": "Essais de la moitié 2",
+      "anticipatoryResponses": "Réponses anticipatoires"
+    },
+    "half1": {
+      "title": "Moitié 1: Cible peu fréquente (Petit carré = Cible)",
+      "targets": "Cibles (Petit)",
+      "nonTargets": "Non-cibles (Grand)",
+      "omissionErrors": "Erreurs d'omission",
+      "commissionErrors": "Erreurs de commission",
+      "hitRT": "Temps de réaction aux coups",
+      "hitRTSD": "Écart-type du temps de réaction aux coups",
+      "variability": "Variabilité (CV%)",
+      "dPrime": "D-Prime"
+    },
+    "half2": {
+      "title": "Moitié 2: Cible fréquente (Grand carré = Cible)",
+      "targets": "Cibles (Grand)",
+      "nonTargets": "Non-cibles (Petit)",
+      "omissionErrors": "Erreurs d'omission",
+      "commissionErrors": "Erreurs de commission",
+      "hitRT": "Temps de réaction aux coups",
+      "hitRTSD": "Écart-type du temps de réaction aux coups",
+      "variability": "Variabilité (CV%)",
+      "dPrime": "D-Prime"
+    },
+    "overall": {
+      "title": "Résultats globaux",
+      "hitRT": "Temps de réaction aux coups global",
+      "variability": "Variabilité globale (CV%)",
+      "dPrime": "D-Prime global",
+      "responseTimeToCorrect": "Temps de réponse aux réponses correctes",
+      "totalOmissionErrors": "Total des erreurs d'omission",
+      "totalCommissionErrors": "Total des erreurs de commission"
+    },
+    "adhdAnalysis": {
+      "title": "Analyse de performance liée au TDAH",
+      "disclaimer": "Avertissement important: Cette analyse est à des fins informatives uniquement et n'est pas un outil de diagnostic. Le diagnostic du TDAH nécessite une évaluation clinique complète par un professionnel de la santé qualifié. La performance au test peut être influencée par de nombreux facteurs, notamment la fatigue, l'anxiété, la motivation et d'autres conditions.",
+      "overallRisk": "Niveau de risque global:",
+      "riskScore": "(Score de risque: {score}/9)",
+      "indicators": "Indicateurs identifiés:",
+      "concerns": "Préoccupations de performance:",
+      "overallOmissionRate": "Taux d'omission global",
+      "overallCommissionRate": "Taux de commission global",
+      "half1OmissionRate": "Taux d'omission de la moitié 1",
+      "half2CommissionRate": "Taux de commission de la moitié 2",
+      "variability": "Variabilité du temps de réaction",
+      "dPrime": "D-Prime (Discriminabilité)",
+      "elevatedInattention": "Élevé (Inattention)",
+      "elevatedImpulsivity": "Élevé (Impulsivité)",
+      "elevatedInfrequent": "Élevé (Cibles peu fréquentes)",
+      "elevatedFrequent": "Élevé (Cibles fréquentes)",
+      "highInconsistent": "Élevé (Incohérent)",
+      "moderate": "Modéré",
+      "normal": "Normal",
+      "reduced": "Réduit",
+      "good": "Bon",
+      "nextSteps": "Prochaines étapes: Si vous avez des préoccupations concernant l'attention ou le contrôle des impulsions, envisagez de consulter un professionnel de la santé spécialisé dans l'évaluation du TDAH. Une évaluation complète comprend généralement des entretiens cliniques, des observations comportementales et peut incorporer plusieurs outils d'évaluation."
+    }
+  }
+}

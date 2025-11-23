@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface TrialResult {
   letter: string;
@@ -68,6 +69,9 @@ const PERSEVERATION_THRESHOLD = 100; // RT < 100ms is a perseveration
 
 export default function CPTAssessmentPage() {
   const router = useRouter();
+  const locale = useLocale();
+  const t = useTranslations('cpt');
+  const tCommon = useTranslations('common');
   const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [currentLetter, setCurrentLetter] = useState<string | null>(null);
@@ -603,31 +607,31 @@ export default function CPTAssessmentPage() {
       <main className="min-h-screen bg-gray-50 py-8 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl font-bold mb-6 text-center text-gray-900">
-            CPT-3 Assessment Complete - Detailed Results
+            {t('complete')}
           </h1>
           
           <div className="space-y-6">
             {/* Basic Statistics */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Basic Statistics</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('basicStats.title')}</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Total Trials</p>
+                  <p className="text-sm text-gray-600">{t('basicStats.totalTrials')}</p>
                   <p className="text-2xl font-bold text-gray-900">{metrics.totalTrials}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Target Letters</p>
+                  <p className="text-sm text-gray-600">{t('basicStats.targetLetters')}</p>
                   <p className="text-2xl font-bold text-blue-600">{metrics.targets}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Non-Target Letters</p>
+                  <p className="text-sm text-gray-600">{t('basicStats.nonTargetLetters')}</p>
                   <p className="text-2xl font-bold text-purple-600">{metrics.nonTargets}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Correct Responses</p>
+                  <p className="text-sm text-gray-600">{t('basicStats.correctResponses')}</p>
                   <p className="text-2xl font-bold text-green-600">{metrics.targets - metrics.omissionErrors}</p>
                   <p className="text-xs text-gray-500">
-                    ({metrics.targets > 0 ? (((metrics.targets - metrics.omissionErrors) / metrics.targets) * 100).toFixed(1) : 0}% accuracy)
+                    {t('basicStats.accuracy', { percent: metrics.targets > 0 ? (((metrics.targets - metrics.omissionErrors) / metrics.targets) * 100).toFixed(1) : 0 })}
                   </p>
                 </div>
               </div>
@@ -635,60 +639,60 @@ export default function CPTAssessmentPage() {
 
             {/* Error Analysis */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Error Analysis</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('errors.title')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Omission Errors</p>
+                  <p className="text-sm text-gray-600">{t('errors.omission')}</p>
                   <p className="text-2xl font-bold text-red-600">{metrics.omissionErrors}</p>
                   <p className="text-xs text-gray-500">
-                    ({metrics.targets > 0 ? ((metrics.omissionErrors / metrics.targets) * 100).toFixed(1) : 0}% of targets)
+                    {t('errors.omissionPercent', { percent: metrics.targets > 0 ? ((metrics.omissionErrors / metrics.targets) * 100).toFixed(1) : 0 })}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Commission Errors</p>
+                  <p className="text-sm text-gray-600">{t('errors.commission')}</p>
                   <p className="text-2xl font-bold text-orange-600">{metrics.commissionErrors}</p>
                   <p className="text-xs text-gray-500">
-                    ({metrics.nonTargets > 0 ? ((metrics.commissionErrors / metrics.nonTargets) * 100).toFixed(1) : 0}% of non-targets)
+                    {t('errors.commissionPercent', { percent: metrics.nonTargets > 0 ? ((metrics.commissionErrors / metrics.nonTargets) * 100).toFixed(1) : 0 })}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Perseverations</p>
+                  <p className="text-sm text-gray-600">{t('errors.perseverations')}</p>
                   <p className="text-2xl font-bold text-yellow-600">{metrics.perseverations}</p>
-                  <p className="text-xs text-gray-500">(RT &lt; 100ms)</p>
+                  <p className="text-xs text-gray-500">{t('errors.rtNote')}</p>
                 </div>
               </div>
             </div>
 
             {/* Response Time Metrics */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Response Time Metrics</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('responseTime.title')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Hit Reaction Time</p>
+                  <p className="text-sm text-gray-600">{t('responseTime.hitRT')}</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {metrics.hitReactionTime > 0 ? `${metrics.hitReactionTime}ms` : 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Hit RT Standard Deviation</p>
+                  <p className="text-sm text-gray-600">{t('responseTime.hitRTSD')}</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {metrics.hitReactionTimeSD > 0 ? `${Math.round(metrics.hitReactionTimeSD)}ms` : metrics.hitReactionTimeSD === -1 ? 'N/A*' : 'N/A'}
                   </p>
                   {metrics.hitReactionTimeSD === -1 && (
-                    <p className="text-xs text-gray-500">*Requires at least 2 hits</p>
+                    <p className="text-xs text-gray-500">{t('responseTime.requires2Hits')}</p>
                   )}
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Variability (CV%)</p>
+                  <p className="text-sm text-gray-600">{t('responseTime.variability')}</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {metrics.variability > 0 ? `${metrics.variability.toFixed(1)}%` : metrics.variability === -1 ? 'N/A*' : 'N/A'}
                   </p>
                   {metrics.variability === -1 && (
-                    <p className="text-xs text-gray-500">*Requires at least 2 hits</p>
+                    <p className="text-xs text-gray-500">{t('responseTime.requires2Hits')}</p>
                   )}
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Response Style</p>
+                  <p className="text-sm text-gray-600">{t('responseTime.responseStyle')}</p>
                   <p className="text-2xl font-bold text-blue-600">{metrics.responseStyle}</p>
                 </div>
               </div>
@@ -696,22 +700,22 @@ export default function CPTAssessmentPage() {
 
             {/* Detectability */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Detectability</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('detectability.title')}</h2>
               <p className="text-lg text-gray-700">
-                Ability to discriminate targets from non-targets: <span className="font-bold text-blue-600">{metrics.detectability.toFixed(2)}</span>
+                {t('detectability.description', { value: metrics.detectability.toFixed(2) })}
               </p>
             </div>
 
             {/* Hit RT by ISI */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Hit Reaction Time by ISI</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('hitRTByISI.title')}</h2>
               {metrics.targets - metrics.omissionErrors === 0 ? (
-                <p className="text-gray-600 italic">No correct responses recorded - cannot calculate reaction times by ISI</p>
+                <p className="text-gray-600 italic">{t('hitRTByISI.noResponses')}</p>
               ) : (
                 <div className="grid grid-cols-3 gap-4">
                   {DELAYS.map(isi => (
                     <div key={isi} className="text-center">
-                      <p className="text-sm text-gray-600">ISI: {isi}ms</p>
+                      <p className="text-sm text-gray-600">{t('hitRTByISI.isi', { value: isi })}</p>
                       <p className="text-xl font-bold text-gray-900">
                         {metrics.hitReactionTimeByISI[isi].mean > 0 
                           ? `${Math.round(metrics.hitReactionTimeByISI[isi].mean)}ms` 
@@ -726,20 +730,18 @@ export default function CPTAssessmentPage() {
 
             {/* Hit RT Block Change */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Hit Reaction Time Block Change</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('hitRTBlockChange.title')}</h2>
               {metrics.targets - metrics.omissionErrors === 0 ? (
-                <p className="text-gray-600 italic">No correct responses recorded - cannot calculate reaction time changes</p>
+                <p className="text-gray-600 italic">{t('hitRTBlockChange.noResponses')}</p>
               ) : (
                 <>
                   <p className="text-lg text-gray-700">
-                    Change in reaction time over blocks: <span className="font-bold text-blue-600">
-                      {metrics.hitReactionTimeBlockChange > 0 ? '+' : ''}{metrics.hitReactionTimeBlockChange.toFixed(2)}ms/block
-                    </span>
+                    {t('hitRTBlockChange.change', { value: `${metrics.hitReactionTimeBlockChange > 0 ? '+' : ''}${metrics.hitReactionTimeBlockChange.toFixed(2)}` })}
                   </p>
                   <div className="mt-4 grid grid-cols-6 gap-2">
                     {Array.from({ length: NUM_BLOCKS }, (_, i) => (
                       <div key={i} className="text-center">
-                        <p className="text-xs text-gray-600">Block {i + 1}</p>
+                        <p className="text-xs text-gray-600">{t('hitRTBlockChange.block', { number: i + 1 })}</p>
                         <p className="text-sm font-bold text-gray-900">
                           {metrics.hitReactionTimeByBlock[i].mean > 0 
                             ? `${Math.round(metrics.hitReactionTimeByBlock[i].mean)}ms` 
@@ -757,11 +759,11 @@ export default function CPTAssessmentPage() {
 
             {/* Omissions by Block */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Omission Errors by Block</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('omissionsByBlock.title')}</h2>
               <div className="grid grid-cols-6 gap-2">
                 {Array.from({ length: NUM_BLOCKS }, (_, i) => (
                   <div key={i} className="text-center">
-                    <p className="text-xs text-gray-600">Block {i + 1}</p>
+                    <p className="text-xs text-gray-600">{t('omissionsByBlock.block', { number: i + 1 })}</p>
                     <p className="text-lg font-bold text-red-600">
                       {metrics.omissionsByBlock[i].rate.toFixed(1)}%
                     </p>
@@ -775,11 +777,11 @@ export default function CPTAssessmentPage() {
 
             {/* Commissions by Block */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Commission Errors by Block</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('commissionsByBlock.title')}</h2>
               <div className="grid grid-cols-6 gap-2">
                 {Array.from({ length: NUM_BLOCKS }, (_, i) => (
                   <div key={i} className="text-center">
-                    <p className="text-xs text-gray-600">Block {i + 1}</p>
+                    <p className="text-xs text-gray-600">{t('commissionsByBlock.block', { number: i + 1 })}</p>
                     <p className="text-lg font-bold text-orange-600">
                       {metrics.commissionsByBlock[i].rate.toFixed(1)}%
                     </p>
@@ -793,11 +795,11 @@ export default function CPTAssessmentPage() {
 
             {/* Omissions by ISI */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Omission Errors by ISI</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('omissionsByISI.title')}</h2>
               <div className="grid grid-cols-3 gap-4">
                 {DELAYS.map(isi => (
                   <div key={isi} className="text-center">
-                    <p className="text-sm text-gray-600">ISI: {isi}ms</p>
+                    <p className="text-sm text-gray-600">{t('omissionsByISI.isi', { value: isi })}</p>
                     <p className="text-xl font-bold text-red-600">
                       {metrics.omissionsByISI[isi].rate.toFixed(1)}%
                     </p>
@@ -811,11 +813,11 @@ export default function CPTAssessmentPage() {
 
             {/* Commissions by ISI */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Commission Errors by ISI</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('commissionsByISI.title')}</h2>
               <div className="grid grid-cols-3 gap-4">
                 {DELAYS.map(isi => (
                   <div key={isi} className="text-center">
-                    <p className="text-sm text-gray-600">ISI: {isi}ms</p>
+                    <p className="text-sm text-gray-600">{t('commissionsByISI.isi', { value: isi })}</p>
                     <p className="text-xl font-bold text-orange-600">
                       {metrics.commissionsByISI[isi].rate.toFixed(1)}%
                     </p>
@@ -836,20 +838,18 @@ export default function CPTAssessmentPage() {
               return (
                 <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-blue-200">
                   <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-                    ADHD-Related Performance Analysis
+                    {t('adhdAnalysis.title')}
                   </h2>
                   
                   <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                     <p className="text-sm text-yellow-800">
-                      <strong>Important Disclaimer:</strong> This analysis is for informational purposes only and is not a diagnostic tool. 
-                      ADHD diagnosis requires comprehensive clinical evaluation by a qualified healthcare professional. 
-                      Test performance can be influenced by many factors including fatigue, anxiety, motivation, and other conditions.
+                      {t('adhdAnalysis.disclaimer')}
                     </p>
                   </div>
 
                   <div className="mb-6">
                     <div className="flex items-center gap-4 mb-4">
-                      <h3 className="text-xl font-semibold text-gray-700">Overall Risk Level:</h3>
+                      <h3 className="text-xl font-semibold text-gray-700">{t('adhdAnalysis.overallRisk')}</h3>
                       <span className={`px-4 py-2 rounded-lg font-bold text-lg ${
                         riskColor === 'red' ? 'bg-red-100 text-red-800' :
                         riskColor === 'orange' ? 'bg-orange-100 text-orange-800' :
@@ -858,14 +858,14 @@ export default function CPTAssessmentPage() {
                         {adhdAnalysis.overallRisk}
                       </span>
                       <span className="text-sm text-gray-600">
-                        (Risk Score: {adhdAnalysis.riskScore}/8)
+                        {t('adhdAnalysis.riskScore', { score: adhdAnalysis.riskScore })}
                       </span>
                     </div>
                   </div>
 
                   {adhdAnalysis.indicators.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="text-lg font-semibold mb-3 text-gray-700">Identified Indicators:</h3>
+                      <h3 className="text-lg font-semibold mb-3 text-gray-700">{t('adhdAnalysis.indicators')}</h3>
                       <ul className="space-y-2">
                         {adhdAnalysis.indicators.map((indicator, idx) => (
                           <li key={idx} className="flex items-start">
@@ -879,7 +879,7 @@ export default function CPTAssessmentPage() {
 
                   {adhdAnalysis.concerns.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="text-lg font-semibold mb-3 text-gray-700">Performance Concerns:</h3>
+                      <h3 className="text-lg font-semibold mb-3 text-gray-700">{t('adhdAnalysis.concerns')}</h3>
                       <ul className="space-y-2">
                         {adhdAnalysis.concerns.map((concern, idx) => (
                           <li key={idx} className="flex items-start">
@@ -893,37 +893,34 @@ export default function CPTAssessmentPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600 mb-1">Omission Error Rate</p>
+                      <p className="text-sm text-gray-600 mb-1">{t('adhdAnalysis.omissionRate')}</p>
                       <p className="text-2xl font-bold text-gray-900">{adhdAnalysis.omissionRate}%</p>
                       <p className="text-xs text-gray-500 mt-1">
-                        {adhdAnalysis.omissionRate > 15 ? 'Elevated (Inattention)' : 
-                         adhdAnalysis.omissionRate > 10 ? 'Moderate' : 'Normal'}
+                        {adhdAnalysis.omissionRate > 15 ? t('adhdAnalysis.elevatedInattention') : 
+                         adhdAnalysis.omissionRate > 10 ? t('adhdAnalysis.moderate') : t('adhdAnalysis.normal')}
                       </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600 mb-1">Commission Error Rate</p>
+                      <p className="text-sm text-gray-600 mb-1">{t('adhdAnalysis.commissionRate')}</p>
                       <p className="text-2xl font-bold text-gray-900">{adhdAnalysis.commissionRate}%</p>
                       <p className="text-xs text-gray-500 mt-1">
-                        {adhdAnalysis.commissionRate > 20 ? 'Elevated (Impulsivity)' : 
-                         adhdAnalysis.commissionRate > 10 ? 'Moderate' : 'Normal'}
+                        {adhdAnalysis.commissionRate > 20 ? t('adhdAnalysis.elevatedImpulsivity') : 
+                         adhdAnalysis.commissionRate > 10 ? t('adhdAnalysis.moderate') : t('adhdAnalysis.normal')}
                       </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600 mb-1">Reaction Time Variability</p>
+                      <p className="text-sm text-gray-600 mb-1">{t('adhdAnalysis.variability')}</p>
                       <p className="text-2xl font-bold text-gray-900">{adhdAnalysis.variability}%</p>
                       <p className="text-xs text-gray-500 mt-1">
-                        {adhdAnalysis.variability > 20 ? 'High (Inconsistent)' : 
-                         adhdAnalysis.variability > 15 ? 'Moderate' : 'Normal'}
+                        {adhdAnalysis.variability > 20 ? t('adhdAnalysis.highInconsistent') : 
+                         adhdAnalysis.variability > 15 ? t('adhdAnalysis.moderate') : t('adhdAnalysis.normal')}
                       </p>
                     </div>
                   </div>
 
                   <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                     <p className="text-sm text-blue-800">
-                      <strong>Next Steps:</strong> If you have concerns about attention or impulse control, 
-                      consider consulting with a healthcare professional who specializes in ADHD assessment. 
-                      A comprehensive evaluation typically includes clinical interviews, behavioral observations, 
-                      and may incorporate multiple assessment tools.
+                      {t('adhdAnalysis.nextSteps')}
                     </p>
                   </div>
                 </div>
@@ -933,10 +930,10 @@ export default function CPTAssessmentPage() {
 
           <div className="flex gap-4 justify-center mt-8">
             <button
-              onClick={() => router.push('/')}
+              onClick={() => router.push(`/${locale}`)}
               className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
             >
-              Back to Home
+              {tCommon('backToHome')}
             </button>
             <button
               onClick={() => {
@@ -949,7 +946,7 @@ export default function CPTAssessmentPage() {
               }}
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Retake Assessment
+              {tCommon('retakeAssessment')}
             </button>
           </div>
         </div>
@@ -962,55 +959,41 @@ export default function CPTAssessmentPage() {
       <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-white">
         <div className="max-w-2xl w-full bg-gray-50 rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold mb-6 text-center text-gray-900">
-            Conners Continuous Performance Test 3rd Edition (CPT-3)
+            {t('title')}
           </h1>
           
           <div className="space-y-4 mb-6">
             <div className="bg-white p-4 rounded-lg shadow">
-              <h2 className="text-xl font-semibold mb-3 text-gray-800">Instructions</h2>
+              <h2 className="text-xl font-semibold mb-3 text-gray-800">{t('instructions.title')}</h2>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span>You will see letters appear on the screen one at a time.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span><strong>Press SPACEBAR or CLICK</strong> when you see any letter <strong>EXCEPT "X"</strong>.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span><strong>Do NOT respond</strong> when you see the letter "X".</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span>The assessment will take approximately <strong>14 minutes</strong> to complete (360 trials).</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-bold mr-2">•</span>
-                  <span>Respond as quickly and accurately as possible.</span>
-                </li>
+                {(t.raw('instructions.items') as string[]).map((item, idx) => (
+                  <li key={idx} className="flex items-start">
+                    <span className="font-bold mr-2">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
               <p className="text-sm text-blue-800">
-                <strong>Tip:</strong> Keep your hands ready. You can use either the spacebar or mouse click to respond.
+                {t('instructions.tip')}
               </p>
             </div>
           </div>
 
           <div className="flex gap-4">
             <button
-              onClick={() => router.push('/')}
+              onClick={() => router.push(`/${locale}`)}
               className="flex-1 px-6 py-4 bg-gray-600 text-white rounded-lg font-semibold text-lg hover:bg-gray-700 transition-colors shadow-lg hover:shadow-xl"
             >
-              Back to Home
+              {tCommon('backToHome')}
             </button>
             <button
               onClick={startAssessment}
               className="flex-1 px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
             >
-              Start Assessment
+              {t('start')}
             </button>
           </div>
         </div>
@@ -1023,13 +1006,13 @@ export default function CPTAssessmentPage() {
       {/* Timer and Stats */}
       <div className="absolute top-4 left-4 right-4 flex justify-between items-center">
         <div className="bg-gray-100 px-4 py-2 rounded-lg shadow">
-          <p className="text-sm text-gray-600">Time Remaining</p>
+          <p className="text-sm text-gray-600">{t('timeRemaining')}</p>
           <p className="text-2xl font-bold text-gray-900">{formatTime(timeRemaining)}</p>
         </div>
         <div className="bg-gray-100 px-4 py-2 rounded-lg shadow">
-          <p className="text-sm text-gray-600">Trials</p>
+          <p className="text-sm text-gray-600">{t('trials')}</p>
           <p className="text-2xl font-bold text-gray-900">
-            {currentTrialNumber} / {TOTAL_TRIALS}
+            {t('currentTrial', { current: currentTrialNumber, total: TOTAL_TRIALS })}
           </p>
         </div>
       </div>
@@ -1056,7 +1039,7 @@ export default function CPTAssessmentPage() {
       <div className="absolute bottom-4 left-4 right-4">
         <div className="bg-blue-50 border border-blue-200 px-6 py-3 rounded-lg text-center">
           <p className="text-sm text-blue-800">
-            <strong>Press SPACEBAR or CLICK</strong> when you see any letter except "X"
+            <strong>{t('pressForNonX')}</strong>
           </p>
         </div>
       </div>
