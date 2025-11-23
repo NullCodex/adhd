@@ -1,25 +1,35 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 export default function RootPage() {
-  const router = useRouter();
-  
   useEffect(() => {
     // Check for saved locale preference or default to 'en'
-    const savedLocale = typeof window !== 'undefined' ? localStorage.getItem('locale') : null;
-    const locale = savedLocale && ['en', 'fr'].includes(savedLocale) ? savedLocale : 'en';
-    
-    // Redirect immediately
     if (typeof window !== 'undefined') {
+      const savedLocale = localStorage.getItem('locale');
+      const locale = savedLocale && ['en', 'fr'].includes(savedLocale) ? savedLocale : 'en';
+      
       const currentPath = window.location.pathname;
-      // Only redirect if we're on the root path
-      if (currentPath === '/' || currentPath === '') {
-        router.replace(`/${locale}`);
+      // Normalize path (remove trailing slash and index.html)
+      const normalizedPath = currentPath.replace(/\/index\.html$/, '').replace(/\/$/, '') || '/';
+      
+      // Check if we're on root path (with or without basePath)
+      // Root paths: '/', '/adhd'
+      const isRootPath = normalizedPath === '/' || normalizedPath === '/adhd';
+      
+      if (isRootPath) {
+        // Extract basePath from current location
+        // For '/adhd', basePath is '/adhd'
+        // For '/', basePath is ''
+        const basePath = normalizedPath === '/adhd' ? '/adhd' : '';
+        
+        // Use window.location.replace for immediate redirect (more reliable for static exports)
+        // Using replace instead of href prevents adding to browser history
+        const newPath = `${basePath}/${locale}`;
+        window.location.replace(newPath);
       }
     }
-  }, [router]);
+  }, []);
 
   // Show loading state while redirecting
   return (
