@@ -10,7 +10,20 @@ export type Locale = (typeof locales)[number];
 export default getRequestConfig(async ({ requestLocale }) => {
   // Get locale from request - next-intl extracts it from [locale] segment
   // The locale comes from the [locale] segment in the URL path
-  let locale = await requestLocale;
+  // During static generation, requestLocale may throw an error because headers() is not available
+  let locale: string | undefined;
+  
+  // Try to get locale from requestLocale, but handle the case where it fails during static generation
+  try {
+    locale = await requestLocale;
+  } catch (error: any) {
+    // During static generation, requestLocale uses headers() which is not available
+    // The error will be caught here. We'll default to 'en' for now.
+    // The actual locale will be provided via route params in the layout component
+    // Since we have generateStaticParams, pages will be generated for all locales
+    // The layout component loads messages directly from the file system, so this is just a fallback
+    locale = 'en';
+  }
 
   // If locale is not available, it means we're not in a [locale] route
   // This should not happen in normal operation, but we handle it gracefully
@@ -27,6 +40,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const validLocale = locale as Locale;
   
   // Load messages with error handling
+  // During static generation, we'll load messages for the default locale
+  // The actual locale-specific messages will be loaded in the layout component
   let messages;
   try {
     messages = (await import(`./messages/${validLocale}.json`)).default;
