@@ -8,7 +8,7 @@ const nextConfig = {
     unoptimized: true,
   },
   // If your repository name is not 'username.github.io', uncomment and set the basePath
-  basePath: process.env.NODE_ENV === 'production' ? '/adhd' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/adhd/en' : '',
   // trailingSlash: true,
 }
 
